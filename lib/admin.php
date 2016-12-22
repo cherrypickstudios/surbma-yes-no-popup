@@ -3,6 +3,7 @@
 include_once( SURBMA_YES_NO_POPUP_PLUGIN_DIR . '/pages/settings.php');
 
 /* Admin options menu */
+add_action( 'admin_menu', 'surbma_yes_no_popup_add_menus' );
 function surbma_yes_no_popup_add_menus() {
 	global $surbma_yes_no_popup_settings_page;
 	$surbma_yes_no_popup_settings_page = add_options_page(
@@ -13,9 +14,9 @@ function surbma_yes_no_popup_add_menus() {
 		'surbma_yes_no_popup_settings_page'
 	);
 }
-add_action( 'admin_menu', 'surbma_yes_no_popup_add_menus' );
 
 // Custom styles and scripts for admin pages
+add_action( 'admin_enqueue_scripts', 'surbma_yes_no_popup_admin_scripts' );
 function surbma_yes_no_popup_admin_scripts( $hook ) {
 	global $surbma_yes_no_popup_settings_page;
     if ( $hook == $surbma_yes_no_popup_settings_page ) {
@@ -24,4 +25,3 @@ function surbma_yes_no_popup_admin_scripts( $hook ) {
     	wp_enqueue_script( 'uikit-js', '//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.1/js/uikit.min.js' );
     }
 }
-add_action( 'admin_enqueue_scripts', 'surbma_yes_no_popup_admin_scripts' );

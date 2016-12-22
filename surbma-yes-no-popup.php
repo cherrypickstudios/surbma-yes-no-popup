@@ -5,7 +5,7 @@ Plugin Name: Surbma - Yes/No Popup
 Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 1.1.0
+Version: 1.2.0
 
 Author: Surbma
 Author URI: http://surbma.com/
@@ -39,10 +39,50 @@ function surbma_yes_no_popup_enqueue_scripts() {
 	wp_enqueue_style( 'surbma-yes-no-popup-styles', plugins_url( '', __FILE__ ) . '/css/styles.css', false, '2.27.1' );
 }
 
-add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+add_action( 'wp_footer', 'surbma_yes_no_popup_show' );
+function surbma_yes_no_popup_show() {
+	$options = get_option( 'surbma_yes_no_popup_fields' );
+
+	if( $options['popupshoweverywhere'] == 1 ) {
+		add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+	}
+	else {
+		if( $options['popupshowfrontpage'] == 1 && is_front_page() ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		if( $options['popupshowblog'] == 1 && is_home() ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		if( $options['popupshowarchive'] == 1 && is_archive() ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		if( $options['popupshowallposts'] == 1 && $options['popupshowposts'] == '' && is_singular( 'post' ) ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		if( $options['popupshowallpages'] == 1 && $options['popupshowpages'] == '' && is_page() ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		$includeposttypes = $options['popupshowposttypes'] ? explode( ',', $options['popupshowposttypes'] ) : '';
+		if( $options['popupshowposttypes'] != '' && $options['popupshowposts'] == '' && is_singular( $includeposttypes ) ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		$includeposts = $options['popupshowposts'] ? explode( ',', $options['popupshowposts'] ) : '';
+		if( $options['popupshowposts'] != '' && is_single( $includeposts ) ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		$includepages = $options['popupshowpages'] ? explode( ',', $options['popupshowpages'] ) : '';
+		if( $options['popupshowpages'] != '' && is_page( $includepages ) ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+	}
+}
+
 function surbma_yes_no_popup_block() {
-	if( !isset( $_COOKIE['surbma-yes-no-popup'] ) ) {
+	if( !isset( $_COOKIE['surbma-yes-no-popup'] ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
 		$options = get_option( 'surbma_yes_no_popup_fields' );
+
+		if ( !isset( $options['popupcookiedays'] ) || $options['popupcookiedays'] == '' )
+			$options['popupcookiedays'] = 1;
 	?>
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
@@ -68,7 +108,7 @@ function surbma_yes_no_popup_block() {
 	<script type="text/javascript">
 		function setCookie() {
 		    var d = new Date();
-		    d.setTime(d.getTime() + (1*24*60*60*1000));
+		    d.setTime(d.getTime() + (<?php echo esc_attr_e( $options['popupcookiedays'] ); ?>*24*60*60*1000));
 		    var expires = "expires="+ d.toUTCString();
 		    document.cookie = "surbma-yes-no-popup=yes;" + expires + ";path=/";
 		}
