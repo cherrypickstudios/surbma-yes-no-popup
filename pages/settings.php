@@ -107,7 +107,7 @@ function surbma_yes_no_popup_settings_page() {
 								</th>
 								<td>
 									<textarea id="surbma_yes_no_popup_fields[popuptext]" class="large-text" cols="50" rows="10" name="surbma_yes_no_popup_fields[popuptext]"><?php echo stripslashes( $options['popuptext'] ); ?></textarea>
-									<p><?php _e( 'Allowed HTML tags in this field', 'surbma-yes-no-popup' ); ?>:<br /><pre style="white-space: pre-line;"><?php echo allowed_tags(); ?></pre></p>
+									<p><?php _e( 'Allowed HTML tags in this field', 'surbma-yes-no-popup' ); ?>:<br /><pre><?php echo allowed_tags(); ?></pre></p>
 								</td>
 							</tr>
 							<tr valign="top">

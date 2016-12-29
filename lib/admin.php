@@ -20,8 +20,6 @@ add_action( 'admin_enqueue_scripts', 'surbma_yes_no_popup_admin_scripts' );
 function surbma_yes_no_popup_admin_scripts( $hook ) {
 	global $surbma_yes_no_popup_settings_page;
     if ( $hook == $surbma_yes_no_popup_settings_page ) {
-    	wp_enqueue_style( 'surbma-yes-no-popup', SURBMA_YES_NO_POPUP_PLUGIN_URL . '/css/admin.css' );
-    	wp_enqueue_style( 'uikit-css', '//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.1/css/uikit.almost-flat.min.css' );
-    	wp_enqueue_script( 'uikit-js', '//cdnjs.cloudflare.com/ajax/libs/uikit/2.27.1/js/uikit.min.js' );
+    	wp_enqueue_style( 'surbma-yes-no-popup', SURBMA_YES_NO_POPUP_PLUGIN_URL . '/css/surbma-admin-min.css' );
     }
 }
