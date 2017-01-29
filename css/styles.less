@@ -12,4 +12,46 @@
 @import "themes/almost-flat/button";
 
 // Fixes
-@import "fixes";
+@modal-z-index:                                 9999999;
+
+.uk-modal-header > :last-child,
+.uk-modal-footer > :last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+// Popup Themes
+.surbma-yes-no-popup-normal .uk-modal-footer {
+	text-align: right;
+}
+
+.surbma-yes-no-popup-normal-centered .uk-modal-dialog {
+	text-align: center;
+}
+
+.uk-modal.surbma-yes-no-popup-full-page-light {
+	background: #fff;
+}
+
+.uk-modal.surbma-yes-no-popup-full-page-dark {
+	background: #000;
+}
+
+.surbma-yes-no-popup-full-page-light .uk-modal-dialog,
+.surbma-yes-no-popup-full-page-dark .uk-modal-dialog {
+	box-shadow: none;
+    text-align: center;
+}
+
+.surbma-yes-no-popup-full-page-light .uk-modal-header,
+.surbma-yes-no-popup-full-page-dark .uk-modal-header,
+.surbma-yes-no-popup-full-page-light .uk-modal-footer,
+.surbma-yes-no-popup-full-page-dark .uk-modal-footer {
+	background: transparent;
+	border: none;
+}
+
+.surbma-yes-no-popup-full-page-dark .uk-modal-dialog {
+	background: #000;
+	color: #fff;
+}

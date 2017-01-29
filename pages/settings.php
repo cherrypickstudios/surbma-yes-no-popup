@@ -61,14 +61,22 @@ $popupbutton2sstyle_options = array(
 	)
 );
 
-$popup_visibility = array(
-	'every-page' => array(
-		'value' => 'every-page',
-		'label' => __( 'Every page', 'surbma-yes-no-popup' )
+$popup_themes = array(
+	'normal' => array(
+		'value' => 'normal',
+		'label' => __( 'Normal theme', 'surbma-yes-no-popup' )
 	),
-	'button-2-redirect' => array(
-		'value' => 'button-2-redirect',
-		'label' => __( 'Button 1: Close / Button 2: Redirect', 'surbma-yes-no-popup' )
+	'normal-centered' => array(
+		'value' => 'normal-centered',
+		'label' => __( 'Normal centered theme', 'surbma-yes-no-popup' )
+	),
+	'full-page-light' => array(
+		'value' => 'full-page-light',
+		'label' => __( 'Full Page Light theme', 'surbma-yes-no-popup' )
+	),
+	'full-page-dark' => array(
+		'value' => 'full-page-dark',
+		'label' => __( 'Full Page Dark theme', 'surbma-yes-no-popup' )
 	)
 );
 
@@ -77,6 +85,7 @@ function surbma_yes_no_popup_settings_page() {
 	global $popupbuttons_options;
 	global $popupbutton1sstyle_options;
 	global $popupbutton2sstyle_options;
+	global $popup_themes;
 
 ?>
 <div class="premium-wp uk-grid uk-margin-top">
@@ -213,6 +222,29 @@ function surbma_yes_no_popup_settings_page() {
 
 						<table class="form-table">
 							<tr valign="top">
+								<th scope="row">
+									<label class="description" for="surbma_yes_no_popup_fields[popupthemes]"><?php _e( 'Popup Theme', 'surbma-yes-no-popup' ); ?></label>
+								</th>
+								<td>
+									<select name="surbma_yes_no_popup_fields[popupthemes]">
+										<?php
+											$selected = $options['popupthemes'];
+											$p = '';
+											$r = '';
+
+											foreach ( $popup_themes as $option ) {
+												$label = $option['label'];
+												if ( $selected == $option['value'] ) // Make default first in list
+													$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												else
+													$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											}
+											echo $p . $r;
+										?>
+									</select>
+								</td>
+							</tr>
+							<tr valign="top">
 								<th scope="row"><?php _e( 'Where to show PopUp?', 'surbma-yes-no-popup' ); ?></th>
 								<td>
 									<p><input id="surbma_yes_no_popup_fields[popupshoweverywhere]" name="surbma_yes_no_popup_fields[popupshoweverywhere]" type="checkbox" value="1" <?php checked( '1', $options['popupshoweverywhere'] ); ?> />
@@ -296,6 +328,7 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	global $popupbuttons_options;
 	global $popupbutton1sstyle_options;
 	global $popupbutton2sstyle_options;
+	global $popup_themes;
 
 	// Say our text option must be safe text with no HTML tags
 	$input['popupbuttonurl'] = wp_filter_nohtml_kses( $input['popupbuttonurl'] );
@@ -341,6 +374,8 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 		$input['popupbutton1style'] = null;
 	if ( ! array_key_exists( $input['popupbutton2style'], $popupbutton2sstyle_options ) )
 		$input['popupbutton2style'] = null;
+	if ( ! array_key_exists( $input['popupthemes'], $popup_themes ) )
+		$input['popupthemes'] = null;
 
 	return $input;
 }

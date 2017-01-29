@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,15 +18,17 @@ This plugin can be used on 18+ adult sites, restricted content websites or any w
 
 This plugin can be an alternative for other Cookie Notice plugins to inform users that your site uses cookies and to comply with the EU cookie law regulations.
 
-IMPORTANT: the popup is intentionally obtrusive and can not be closed, except clicking on the yes or no buttons.
+**IMPORTANT:** the popup is intentionally obtrusive and can not be closed, except clicking on the yes or no buttons.
 
-You can set where to show the popup, for example: only on frontpage, only on category pages, only on special pages or posts, even for Custom Post Types and more...
+**POPUP POSITIONS:** You can set where to show the popup, for example: only on frontpage, only on category pages, only on special pages or posts, even for Custom Post Types and more...
 
-Every text is customizable, even the button's texts! You can also set the design of the buttons and you have the option to make the first or the second button to be the confirmation button.
+**FULL CUSTOMIZATIONS:** Every text is customizable, even the button's texts! You can also set the design of the buttons and you have the option to make the first or the second button to be the confirmation button.
 
-Set cookie expiration for visitors, so the popup won't show again in X days, you set.
+**THEMES:** There are popup themes to choose the design, you like. The Full Page Themes are hiding the entire content behind the popup.
 
-If you enable debug mode, popup will show always, on every refresh, so you can test how it works.
+**FULL CONTROL:** Set cookie expiration for visitors, so the popup won't show again in X days, you set.
+
+**DEVELOPER FRIENDLY:** If you enable debug mode, popup will show always, on every refresh, so you can test how it works.
 
 **Do you want to contribute or help improving this plugin?**
 
@@ -65,6 +67,10 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 1.3.0 =
+
+- NEW Feature: Themes. There are 3 new themes added now and more are coming. Check out the two new full page themes to hide everything behind the popup!
 
 = 1.2.1 =
 

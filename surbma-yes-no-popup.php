@@ -5,7 +5,7 @@ Plugin Name: Surbma - Yes/No Popup
 Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 1.2.1
+Version: 1.3.0
 
 Author: Surbma
 Author URI: http://surbma.com/
@@ -83,19 +83,21 @@ function surbma_yes_no_popup_block() {
 
 		if ( !isset( $options['popupcookiedays'] ) || $options['popupcookiedays'] == '' )
 			$options['popupcookiedays'] = 1;
+		if ( !isset( $options['popupthemes'] ) )
+			$options['popupthemes'] = 'normal';
 	?>
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$.UIkit.modal(('#surbma-yes-no-popup'), {center: true,keyboard: false,bgclose: false}).show();
 		});
 	</script>
-	<div id="surbma-yes-no-popup" class="uk-modal">
+	<div id="surbma-yes-no-popup" class="uk-modal <?php echo 'surbma-yes-no-popup-' . $options['popupthemes']; ?>">
         <div class="uk-modal-dialog">
 			<div class="uk-modal-header">
 				<h2><?php echo esc_attr_e( $options['popuptitle'] ); ?></h2>
 			</div>
 			<div class="uk-modal-content"><?php echo stripslashes( $options['popuptext'] ); ?></div>
-			<div class="uk-modal-footer uk-text-right">
+			<div class="uk-modal-footer">
 				<button id="button1" type="button" class="uk-button uk-button-large uk-button-<?php echo esc_attr_e( $options['popupbutton1style'] ); ?><?php if( $options['popupbuttonoptions'] != 'button-1-redirect' ) echo ' uk-modal-close'; ?>">
 					<?php echo esc_attr_e( $options['popupbutton1text'] ); ?>
 				</button>
