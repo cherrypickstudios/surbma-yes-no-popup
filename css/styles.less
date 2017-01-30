@@ -12,7 +12,12 @@
 @import "themes/almost-flat/button";
 
 // Fixes
-@modal-z-index:                                 9999999;
+@modal-z-index: 9999999;
+@button-large-line-height: 1.6em;
+
+.hook-button-large () {
+	padding: 11px @button-large-padding-horizontal !important;
+}
 
 .uk-modal-header > :last-child,
 .uk-modal-footer > :last-child {
