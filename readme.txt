@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 1.3.1
+Stable tag: 1.4.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,10 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 1.4.0 =
+
+- Added new condition: post category.
 
 = 1.3.1 =
 

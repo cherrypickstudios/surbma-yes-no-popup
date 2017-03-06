@@ -290,6 +290,15 @@ function surbma_yes_no_popup_settings_page() {
 									<p class="description"><?php _e( 'If page IDs are entered, "All pages" option will be ignored!', 'surbma-yes-no-popup' ); ?></p>
 								</td>
 							</tr>
+							<tr valign="top">
+								<th scope="row">
+									<label class="description" for="surbma_yes_no_popup_fields[popupshowcategories]"><?php _e( 'Only on these category archive pages:', 'surbma-yes-no-popup' ); ?></label>
+								</th>
+								<td>
+									<input id="surbma_yes_no_popup_fields[popupshowcategories]" class="regular-text" type="text" name="surbma_yes_no_popup_fields[popupshowcategories]" value="<?php esc_attr_e( $options['popupshowcategories'] ); ?>" placeholder="Category IDs, comma separated" />
+									<p class="description"><?php _e( 'This will enable Popup on category archive and all the category post single pages.', 'surbma-yes-no-popup' ); ?></p>
+								</td>
+							</tr>
 						</table>
 
 						<p><input type="submit" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
@@ -339,6 +348,7 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	$input['popupshowposttypes'] = wp_filter_nohtml_kses( str_replace( ' ', '', $input['popupshowposttypes'] ) );
 	$input['popupshowpages'] = wp_filter_nohtml_kses( str_replace( ' ', '', $input['popupshowpages'] ) );
 	$input['popupshowpages'] = wp_filter_nohtml_kses( str_replace( ' ', '', $input['popupshowpages'] ) );
+	$input['popupshowcategories'] = wp_filter_nohtml_kses( str_replace( ' ', '', $input['popupshowcategories'] ) );
 
 	// Say our textarea option must be safe text with the allowed tags for posts
 	$input['popuptext'] = wp_filter_post_kses( $input['popuptext'] );

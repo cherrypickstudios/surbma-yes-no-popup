@@ -5,7 +5,7 @@ Plugin Name: Surbma - Yes/No Popup
 Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 1.3.1
+Version: 1.4.0
 
 Author: Surbma
 Author URI: http://surbma.com/
@@ -72,6 +72,10 @@ function surbma_yes_no_popup_show() {
 		}
 		$includepages = $options['popupshowpages'] ? explode( ',', $options['popupshowpages'] ) : '';
 		if( $options['popupshowpages'] != '' && is_page( $includepages ) ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		$includecategories = $options['popupshowcategories'] ? explode( ',', $options['popupshowcategories'] ) : '';
+		if( $options['popupshowcategories'] != '' && $options['popupshowarchive'] != 1 && ( is_category( $includecategories ) || in_category( $includecategories ) ) ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 		}
 	}
