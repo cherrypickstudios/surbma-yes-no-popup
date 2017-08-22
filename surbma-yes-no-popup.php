@@ -82,58 +82,71 @@ function surbma_yes_no_popup_show() {
 }
 
 function surbma_yes_no_popup_block() {
-	if( !isset( $_COOKIE['surbma-yes-no-popup'] ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG == true ) ) {
-		$options = get_option( 'surbma_yes_no_popup_fields' );
+	$options = get_option( 'surbma_yes_no_popup_fields' );
 
-		if ( !isset( $options['popupcookiedays'] ) || $options['popupcookiedays'] == '' )
-			$options['popupcookiedays'] = 1;
-		if ( !isset( $options['popupthemes'] ) )
-			$options['popupthemes'] = 'normal';
+	$popuphideloggedin = 0;
+	if ( isset( $options['popuphideloggedin'] ) && $options['popuphideloggedin'] == 1 && is_user_logged_in() )
+		$popuphideloggedin = 1;
+
+	$popupdebug = 0;
+	if ( isset( $options['popupdebug'] ) && $options['popupdebug'] == 1 )
+		$popupdebug = 1;
+
+	$popupcookiedays = 1;
+	if ( isset( $options['popupcookiedays'] ) && $options['popupcookiedays'] != '' )
+		$popupcookiedays = $options['popupcookiedays'];
+
+	$popupthemes = 'normal';
+	if ( isset( $options['popupthemes'] ) && $options['popupthemes'] != '' )
+		$popupthemes = $options['popupthemes'];
 	?>
-	<script type="text/javascript">
-		jQuery(document).ready(function($) {
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		if( readCookie('surbma-yes-no-popup') != 'yes' ) {
 			$.UIkit.modal(('#surbma-yes-no-popup'), {center: true,keyboard: false,bgclose: false}).show();
-		});
-	</script>
-	<div id="surbma-yes-no-popup" class="uk-modal <?php echo 'surbma-yes-no-popup-' . $options['popupthemes']; ?>">
-        <div class="uk-modal-dialog">
-			<div class="uk-modal-header">
-				<h2><?php echo esc_attr_e( $options['popuptitle'] ); ?></h2>
-			</div>
-			<div class="uk-modal-content"><?php echo stripslashes( $options['popuptext'] ); ?></div>
-			<div class="uk-modal-footer">
-				<button id="button1" type="button" class="uk-button uk-button-large uk-button-<?php echo esc_attr_e( $options['popupbutton1style'] ); ?><?php if( $options['popupbuttonoptions'] != 'button-1-redirect' ) echo ' uk-modal-close'; ?>">
-					<?php echo esc_attr_e( $options['popupbutton1text'] ); ?>
-				</button>
-				<button id="button2" type="button" class="uk-button uk-button-large uk-button-<?php echo esc_attr_e( $options['popupbutton2style'] ); ?><?php if( $options['popupbuttonoptions'] == 'button-1-redirect' ) echo ' uk-modal-close'; ?>">
-					<?php echo esc_attr_e( $options['popupbutton2text'] ); ?>
-				</button>
-			</div>
+		}
+	});
+</script>
+<div id="surbma-yes-no-popup" class="uk-modal <?php echo 'surbma-yes-no-popup-' . $popupthemes; ?>">
+    <div class="uk-modal-dialog">
+		<div class="uk-modal-header">
+			<h2><?php echo esc_attr_e( $options['popuptitle'] ); ?></h2>
+		</div>
+		<div class="uk-modal-content"><?php echo stripslashes( $options['popuptext'] ); ?></div>
+		<div class="uk-modal-footer">
+			<button id="button1" type="button" class="uk-button uk-button-large uk-button-<?php echo esc_attr_e( $options['popupbutton1style'] ); ?><?php if( $options['popupbuttonoptions'] != 'button-1-redirect' ) echo ' uk-modal-close'; ?>"><?php echo esc_attr_e( $options['popupbutton1text'] ); ?></button>
+			<button id="button2" type="button" class="uk-button uk-button-large uk-button-<?php echo esc_attr_e( $options['popupbutton2style'] ); ?><?php if( $options['popupbuttonoptions'] == 'button-1-redirect' ) echo ' uk-modal-close'; ?>"><?php echo esc_attr_e( $options['popupbutton2text'] ); ?></button>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function setCookie() {
-		    var d = new Date();
-		    d.setTime(d.getTime() + (<?php echo esc_attr_e( $options['popupcookiedays'] ); ?>*24*60*60*1000));
-		    var expires = "expires="+ d.toUTCString();
-		    document.cookie = "surbma-yes-no-popup=yes;" + expires + ";path=/";
-		}
-		<?php if( $options['popupbuttonoptions'] != 'button-1-redirect' ) { ?>
-	    	document.getElementById("button1").onclick = function () {
-				setCookie();
-	    	};
-	    	document.getElementById("button2").onclick = function () {
-	        	location.href = "<?php echo esc_attr_e( $options['popupbuttonurl'] ); ?>";
-	    	};
-		<?php } else { ?>
-	    	document.getElementById("button1").onclick = function () {
-	        	location.href = "<?php echo esc_attr_e( $options['popupbuttonurl'] ); ?>";
-	    	};
-	    	document.getElementById("button2").onclick = function () {
-				setCookie();
-	    	};
-		<?php } ?>
-	</script>
-	<?php
+</div>
+<script type="text/javascript">
+	function setCookie() {
+	    var d = new Date();
+	    d.setTime(d.getTime() + (<?php echo esc_attr_e( $popupcookiedays ); ?>*24*60*60*1000));
+	    var expires = "expires="+ d.toUTCString();
+	    document.cookie = "surbma-yes-no-popup=yes;" + expires + ";path=/";
 	}
+	function readCookie(cookieName) {
+		var re = new RegExp('[; ]'+cookieName+'=([^\\s;]*)');
+		var sMatch = (' '+document.cookie).match(re);
+		if (cookieName && sMatch) return unescape(sMatch[1]);
+		return '';
+	}
+	<?php if( $options['popupbuttonoptions'] != 'button-1-redirect' ) { ?>
+    	document.getElementById("button1").onclick = function () {
+			setCookie();
+    	};
+    	document.getElementById("button2").onclick = function () {
+        	location.href = "<?php echo esc_attr_e( $options['popupbuttonurl'] ); ?>";
+    	};
+	<?php } else { ?>
+    	document.getElementById("button1").onclick = function () {
+        	location.href = "<?php echo esc_attr_e( $options['popupbuttonurl'] ); ?>";
+    	};
+    	document.getElementById("button2").onclick = function () {
+			setCookie();
+    	};
+	<?php } ?>
+</script>
+<?php
 }

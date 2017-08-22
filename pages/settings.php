@@ -299,6 +299,21 @@ function surbma_yes_no_popup_settings_page() {
 									<p class="description"><?php _e( 'This will enable Popup on category archive and all the category post single pages.', 'surbma-yes-no-popup' ); ?></p>
 								</td>
 							</tr>
+							<tr valign="top">
+								<th scope="row"><?php _e( 'Hide for logged in users', 'surbma-yes-no-popup' ); ?></th>
+								<td>
+									<p><input id="surbma_yes_no_popup_fields[popuphideloggedin]" name="surbma_yes_no_popup_fields[popuphideloggedin]" type="checkbox" value="1" <?php checked( '1', $options['popuphideloggedin'] ); ?> />
+									<label class="description" for="surbma_yes_no_popup_fields[popuphideloggedin]"><?php _e( 'Hide Popup for logged in users', 'surbma-yes-no-popup' ); ?></label></p>
+								</td>
+							</tr>
+							<tr valign="top">
+								<th scope="row"><?php _e( 'Debug mode', 'surbma-yes-no-popup' ); ?></th>
+								<td>
+									<p><input id="surbma_yes_no_popup_fields[popupdebug]" name="surbma_yes_no_popup_fields[popupdebug]" type="checkbox" value="1" <?php checked( '1', $options['popupdebug'] ); ?> />
+									<label class="description" for="surbma_yes_no_popup_fields[popupdebug]"><?php _e( 'Always show Popup', 'surbma-yes-no-popup' ); ?></label></p>
+									<p class="description"><?php _e( 'If this option is enabled, Popup will always be visible, whatever button is clicked! Good for content testing.', 'surbma-yes-no-popup' ); ?></p>
+								</td>
+							</tr>
 						</table>
 
 						<p><input type="submit" class="button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
@@ -376,6 +391,14 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	if ( ! isset( $input['popupshowallpages'] ) )
 		$input['popupshowallpages'] = null;
 	$input['popupshowallpages'] = ( $input['popupshowallpages'] == 1 ? 1 : 0 );
+
+	if ( ! isset( $input['popuphideloggedin'] ) )
+		$input['popuphideloggedin'] = null;
+	$input['popuphideloggedin'] = ( $input['popuphideloggedin'] == 1 ? 1 : 0 );
+
+	if ( ! isset( $input['popupdebug'] ) )
+		$input['popupdebug'] = null;
+	$input['popupdebug'] = ( $input['popupdebug'] == 1 ? 1 : 0 );
 
 	// Our select option must actually be in our array of select options
 	if ( ! array_key_exists( $input['popupbuttonoptions'], $popupbuttons_options ) )
