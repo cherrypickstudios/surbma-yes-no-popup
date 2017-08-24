@@ -5,7 +5,7 @@ Plugin Name: Surbma - Yes/No Popup
 Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 1.5.0
+Version: 1.6.0
 
 Author: Surbma
 Author URI: http://surbma.com/
@@ -43,7 +43,13 @@ add_action( 'wp_footer', 'surbma_yes_no_popup_show' );
 function surbma_yes_no_popup_show() {
 	$options = get_option( 'surbma_yes_no_popup_fields' );
 
-	if( $options['popupshoweverywhere'] == 1 ) {
+	$popupshoweverywhere = $options['popupshoweverywhere'];
+	$popupexcepthere = $options['popupexcepthere'];
+
+	if( $popupshoweverywhere == 1 && $popupexcepthere == '' ) {
+		add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+	}
+	elseif( $popupshoweverywhere == 1 && $popupexcepthere != '' && !is_page( $popupexcepthere ) ) {
 		add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 	}
 	else {
@@ -88,6 +94,14 @@ function surbma_yes_no_popup_block() {
 	if ( isset( $options['popuphideloggedin'] ) && $options['popuphideloggedin'] == 1 && is_user_logged_in() )
 		$popuphideloggedin = 1;
 
+	$popupshownotloggedin = 0;
+	if ( isset( $options['popupshownotloggedin'] ) && $options['popupshownotloggedin'] == 1 && !is_user_logged_in() )
+		$popupshownotloggedin = 1;
+
+	$popuphidebutton2 = 0;
+	if ( isset( $options['popuphidebutton2'] ) && $options['popuphidebutton2'] == 1 )
+		$popuphidebutton2 = 1;
+
 	$popupdebug = 0;
 	if ( isset( $options['popupdebug'] ) && $options['popupdebug'] == 1 )
 		$popupdebug = 1;
@@ -101,14 +115,15 @@ function surbma_yes_no_popup_block() {
 		$popupthemes = $options['popupthemes'];
 	?>
 <input type="hidden" id="popuphideloggedin" value="<?php echo $popuphideloggedin; ?>" />
+<input type="hidden" id="popupshownotloggedin" value="<?php echo $popupshownotloggedin; ?>" />
 <input type="hidden" id="popupdebug" value="<?php echo $popupdebug; ?>" />
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		var show_modal = 0;
-		if( $('#popupdebug').val() == '1' ) {
+		if( $('#popupdebug').val() == '1' || $('#popupshownotloggedin').val() == '1' ) {
 			show_modal = 1;
 		} else {
-			if( readCookie('surbma-yes-no-popup') != 'yes' && $('#popuphideloggedin').val() == '0' ) {
+			if( readCookie('surbma-yes-no-popup') != 'yes' && $('#popuphideloggedin').val() != '1' ) {
 				show_modal = 1;
 			}
 		}
@@ -126,7 +141,9 @@ function surbma_yes_no_popup_block() {
 		<div class="uk-modal-content"><?php echo stripslashes( $options['popuptext'] ); ?></div>
 		<div class="uk-modal-footer">
 			<button id="button1" type="button" class="uk-button uk-button-large uk-button-<?php echo esc_attr_e( $options['popupbutton1style'] ); ?><?php if( $options['popupbuttonoptions'] != 'button-1-redirect' ) echo ' uk-modal-close'; ?>"><?php echo esc_attr_e( $options['popupbutton1text'] ); ?></button>
-			<button id="button2" type="button" class="uk-button uk-button-large uk-button-<?php echo esc_attr_e( $options['popupbutton2style'] ); ?><?php if( $options['popupbuttonoptions'] == 'button-1-redirect' ) echo ' uk-modal-close'; ?>"><?php echo esc_attr_e( $options['popupbutton2text'] ); ?></button>
+			<?php if( $popuphidebutton2 != 1 ) { ?>
+				<button id="button2" type="button" class="uk-button uk-button-large uk-button-<?php echo esc_attr_e( $options['popupbutton2style'] ); ?><?php if( $options['popupbuttonoptions'] == 'button-1-redirect' ) echo ' uk-modal-close'; ?>"><?php echo esc_attr_e( $options['popupbutton2text'] ); ?></button>
+			<?php } ?>
 		</div>
 	</div>
 </div>

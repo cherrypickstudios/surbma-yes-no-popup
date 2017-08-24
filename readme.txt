@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,7 @@ This plugin can be an alternative for other Cookie Notice plugins to inform user
 
 **FULL CONTROL:** Set cookie expiration for visitors, so the popup won't show again in X days, you set.
 
-**MEMBERSHIP MODE:** You can disable popup for logged in users, so your members will not see any popups at all.
+**MEMBERSHIP MODE:** You can disable popup for logged in users, so your members will not see any popups at all. You can always show the popup to all visitors, who are not logged in, even if they clicked on the Yes button. There is a "One button mode" also, that will hide the second button, so you can show only one option to your visitors. This option is best paired with the "always show to all visitors, who are not logged in" option, so you can keep your content safe.
 
 **DEVELOPER FRIENDLY:** If you enable debug mode, popup will show always, on every refresh, so you can test how it works.
 
@@ -69,6 +69,13 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 1.6.0 =
+
+- Membership mode! New options for membership sites.
+- Added "Always show Popup for NOT logged in users" option.
+- Added "One button mode (Show only Popup Button 1)" option.
+- Added "Except on this page" option to "EVERYWHERE" option, to let you choose one page, where the popup will not show up. Good for registration or login pages.
 
 = 1.5.0 =
 

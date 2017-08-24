@@ -249,6 +249,8 @@ function surbma_yes_no_popup_settings_page() {
 								<td>
 									<p><input id="surbma_yes_no_popup_fields[popupshoweverywhere]" name="surbma_yes_no_popup_fields[popupshoweverywhere]" type="checkbox" value="1" <?php checked( '1', $options['popupshoweverywhere'] ); ?> />
 									<label class="description" for="surbma_yes_no_popup_fields[popupshoweverywhere]"><?php _e( 'EVERYWHERE', 'surbma-yes-no-popup' ); ?></label></p>
+									<p><?php _e( 'Except on this page', 'surbma-yes-no-popup' ); ?>:
+									<input id="surbma_yes_no_popup_fields[popupexcepthere]" class="small-text" type="number" name="surbma_yes_no_popup_fields[popupexcepthere]" value="<?php esc_attr_e( $options['popupexcepthere'] ); ?>" placeholder="ID" /> (<?php _e( 'You can give only ONE PAGE ID!', 'surbma-yes-no-popup' ); ?>)</p>
 									<p class="description"><?php _e( 'If this option is enabled, all other options below will be ignored!', 'surbma-yes-no-popup' ); ?></p>
 									<hr>
 									<p><input id="surbma_yes_no_popup_fields[popupshowfrontpage]" name="surbma_yes_no_popup_fields[popupshowfrontpage]" type="checkbox" value="1" <?php checked( '1', $options['popupshowfrontpage'] ); ?> />
@@ -300,10 +302,14 @@ function surbma_yes_no_popup_settings_page() {
 								</td>
 							</tr>
 							<tr valign="top">
-								<th scope="row"><?php _e( 'Hide for logged in users', 'surbma-yes-no-popup' ); ?></th>
+								<th scope="row"><?php _e( 'Membership mode', 'surbma-yes-no-popup' ); ?></th>
 								<td>
 									<p><input id="surbma_yes_no_popup_fields[popuphideloggedin]" name="surbma_yes_no_popup_fields[popuphideloggedin]" type="checkbox" value="1" <?php checked( '1', $options['popuphideloggedin'] ); ?> />
 									<label class="description" for="surbma_yes_no_popup_fields[popuphideloggedin]"><?php _e( 'Hide Popup for logged in users', 'surbma-yes-no-popup' ); ?></label></p>
+									<p><input id="surbma_yes_no_popup_fields[popupshownotloggedin]" name="surbma_yes_no_popup_fields[popupshownotloggedin]" type="checkbox" value="1" <?php checked( '1', $options['popupshownotloggedin'] ); ?> />
+									<label class="description" for="surbma_yes_no_popup_fields[popupshownotloggedin]"><?php _e( 'Always show Popup for NOT logged in users', 'surbma-yes-no-popup' ); ?></label></p>
+									<p><input id="surbma_yes_no_popup_fields[popuphidebutton2]" name="surbma_yes_no_popup_fields[popuphidebutton2]" type="checkbox" value="1" <?php checked( '1', $options['popuphidebutton2'] ); ?> />
+									<label class="description" for="surbma_yes_no_popup_fields[popuphidebutton2]"><?php _e( 'One button mode (Show only Popup Button 1)', 'surbma-yes-no-popup' ); ?></label></p>
 								</td>
 							</tr>
 							<tr valign="top">
@@ -365,6 +371,9 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	$input['popupshowpages'] = wp_filter_nohtml_kses( str_replace( ' ', '', $input['popupshowpages'] ) );
 	$input['popupshowcategories'] = wp_filter_nohtml_kses( str_replace( ' ', '', $input['popupshowcategories'] ) );
 
+	// Say our input option must be only numbers
+	$input['popupexcepthere'] = preg_replace( "/[^0-9]/", "", $input['popupexcepthere'] );
+
 	// Say our textarea option must be safe text with the allowed tags for posts
 	$input['popuptext'] = wp_filter_post_kses( $input['popuptext'] );
 
@@ -395,6 +404,14 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	if ( ! isset( $input['popuphideloggedin'] ) )
 		$input['popuphideloggedin'] = null;
 	$input['popuphideloggedin'] = ( $input['popuphideloggedin'] == 1 ? 1 : 0 );
+
+	if ( ! isset( $input['popupshownotloggedin'] ) )
+		$input['popupshownotloggedin'] = null;
+	$input['popupshownotloggedin'] = ( $input['popupshownotloggedin'] == 1 ? 1 : 0 );
+
+	if ( ! isset( $input['popuphidebutton2'] ) )
+		$input['popuphidebutton2'] = null;
+	$input['popuphidebutton2'] = ( $input['popuphidebutton2'] == 1 ? 1 : 0 );
 
 	if ( ! isset( $input['popupdebug'] ) )
 		$input['popupdebug'] = null;
