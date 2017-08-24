@@ -5,7 +5,7 @@ Plugin Name: Surbma - Yes/No Popup
 Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 1.4.0
+Version: 1.5.0
 
 Author: Surbma
 Author URI: http://surbma.com/
@@ -100,11 +100,22 @@ function surbma_yes_no_popup_block() {
 	if ( isset( $options['popupthemes'] ) && $options['popupthemes'] != '' )
 		$popupthemes = $options['popupthemes'];
 	?>
+<input type="hidden" id="popuphideloggedin" value="<?php echo $popuphideloggedin; ?>" />
+<input type="hidden" id="popupdebug" value="<?php echo $popupdebug; ?>" />
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
-		if( readCookie('surbma-yes-no-popup') != 'yes' ) {
+		var show_modal = 0;
+		if( $('#popupdebug').val() == '1' ) {
+			show_modal = 1;
+		} else {
+			if( readCookie('surbma-yes-no-popup') != 'yes' && $('#popuphideloggedin').val() == '0' ) {
+				show_modal = 1;
+			}
+		}
+		if( show_modal == 1 ) {
 			$.UIkit.modal(('#surbma-yes-no-popup'), {center: true,keyboard: false,bgclose: false}).show();
 		}
+		// console.log('show_modal'+show_modal);
 	});
 </script>
 <div id="surbma-yes-no-popup" class="uk-modal <?php echo 'surbma-yes-no-popup-' . $popupthemes; ?>">

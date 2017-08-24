@@ -3,8 +3,8 @@ Contributors: Surbma
 Donate link: https://surbma.com/donate/
 Tags: popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.0
-Tested up to: 4.7
-Stable tag: 1.4.0
+Tested up to: 4.8
+Stable tag: 1.5.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,8 @@ This plugin can be an alternative for other Cookie Notice plugins to inform user
 **THEMES:** There are popup themes to choose the design, you like. The Full Page Themes are hiding the entire content behind the popup.
 
 **FULL CONTROL:** Set cookie expiration for visitors, so the popup won't show again in X days, you set.
+
+**MEMBERSHIP MODE:** You can disable popup for logged in users, so your members will not see any popups at all.
 
 **DEVELOPER FRIENDLY:** If you enable debug mode, popup will show always, on every refresh, so you can test how it works.
 
@@ -67,6 +69,13 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 1.5.0 =
+
+- Improved cookie read method to make it compatible with server side caching.
+- Added Debug mode option to settings page.
+- Added Hide Popup for logged in users option to settings page.
+- Tested with WordPress 4.8 version.
 
 = 1.4.0 =
 
