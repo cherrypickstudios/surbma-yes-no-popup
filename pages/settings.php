@@ -89,13 +89,7 @@ function surbma_yes_no_popup_settings_page() {
 
 ?>
 <div class="surbma-admin">
-	<nav class="uk-navbar-container uk-margin" id="surbma-header" uk-navbar>
-    	<div class="uk-navbar-left">
-			<div class="uk-navbar-item uk-logo">
-            	<div><span uk-icon="icon: move; ratio: 2"></span> <?php _e( 'Surbma - Yes/No Popup Settings', 'surbma-yes-no-popup' ); ?></div>
-        	</div>
-	    </div>
-	</nav>
+	<?php surbma_admin_header(); ?>
 	<div class="wrap">
 	<div class="uk-grid-small" uk-grid>
 		<div class="uk-width-3-4@m">
@@ -395,15 +389,7 @@ function surbma_yes_no_popup_settings_page() {
 	</div>
 	<div class="uk-margin-bottom" id="bottom"></div>
 	</div>
-	<div class="uk-section uk-section-small">
-	    <div class="uk-text-center">
-	        <p>
-				<strong><a class="uk-link-reset" href="<?php echo SURBMA_YES_NO_POPUP_PLUGIN_PLUGINURI; ?>" target="_blank"><?php echo SURBMA_YES_NO_POPUP_PLUGIN_NAME; ?></a></strong><br>
-				<a href="<?php echo SURBMA_YES_NO_POPUP_PLUGIN_AUTHORURI; ?>" target="_blank"><?php _e( 'Made with &hearts; by Surbma', 'surbma-yes-no-popup' ); ?></a><br>
-				<?php _e( 'Version', 'surbma-yes-no-popup' ); ?>: <?php echo SURBMA_YES_NO_POPUP_PLUGIN_VERSION; ?>
-			</p>
-    	</div>
-	</div>
+	<?php surbma_admin_footer(); ?>
 </div>
 <?php
 }

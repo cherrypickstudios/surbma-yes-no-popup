@@ -1,4 +1,4 @@
-.notice+.surbma-admin {
+.notice + .surbma-admin {
 	margin-top: 10px;
 }
 
@@ -7,8 +7,10 @@
 }
 
 .surbma-admin #surbma-header {
-	background: linear-gradient(to left, #28a5f5, #1e87f0) !important;
+	background: url(background-texture.jpg), linear-gradient(to left, #28a5f5, #1e87f0) !important;
+	background-blend-mode: overlay;
 	margin: 0 0 0 -20px;
+	padding: 10px;
 }
 
 .surbma-admin .uk-navbar-container .uk-navbar-item {

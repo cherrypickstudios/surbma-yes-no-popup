@@ -5,7 +5,7 @@ Plugin Name: Surbma - Yes/No Popup
 Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 2.0.0
+Version: 2.0.1
 
 Author: Surbma
 Author URI: http://surbma.com/
@@ -21,16 +21,6 @@ if ( !defined( 'ABSPATH' ) ) exit( 'Good try! :)' );
 
 define( 'SURBMA_YES_NO_POPUP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SURBMA_YES_NO_POPUP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
-
-$plugin_data = get_plugin_data( __FILE__ );
-$plugin_version = $plugin_data['Version'];
-define ( 'SURBMA_YES_NO_POPUP_PLUGIN_VERSION', $plugin_version );
-$plugin_name = $plugin_data['Name'];
-define ( 'SURBMA_YES_NO_POPUP_PLUGIN_NAME', $plugin_name );
-$plugin_authorURI = $plugin_data['AuthorURI'];
-define ( 'SURBMA_YES_NO_POPUP_PLUGIN_AUTHORURI', $plugin_authorURI );
-$plugin_pluginURI = $plugin_data['PluginURI'];
-define ( 'SURBMA_YES_NO_POPUP_PLUGIN_PLUGINURI', $plugin_pluginURI );
 
 // Localization
 add_action( 'plugins_loaded', 'surbma_yes_no_popup_init' );
