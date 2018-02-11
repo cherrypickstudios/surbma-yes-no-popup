@@ -5,7 +5,7 @@ Plugin Name: Surbma - Yes/No Popup
 Plugin URI: http://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 2.0.1
+Version: 2.1.0
 
 Author: Surbma
 Author URI: http://surbma.com/
