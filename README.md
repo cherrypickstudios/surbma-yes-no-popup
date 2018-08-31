@@ -1,4 +1,4 @@
-Surbma - Yes/No Popup
-=====================
+Surbma | Age Verification Yes/No Popup
+======================================
 
-Shows a popup with Yes/No options.
+Shows a popup with age verification options. One of the best plugin for +18 adult sites or any sites, that requires any confirmation from a visitor.

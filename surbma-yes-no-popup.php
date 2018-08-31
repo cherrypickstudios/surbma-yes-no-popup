@@ -1,11 +1,11 @@
 <?php
 
 /*
-Plugin Name: Surbma - Yes/No Popup
-Plugin URI: http://surbma.com/wordpress-plugins/
+Plugin Name: Surbma | Age Verification Yes/No Popup
+Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 2.1.0
+Version: 2.2
 
 Author: Surbma
 Author URI: http://surbma.com/

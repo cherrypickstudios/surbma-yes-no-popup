@@ -1,18 +1,18 @@
-=== Surbma - Yes/No Popup ===
+=== Surbma | Age Verification Yes/No Popup ===
 Contributors: Surbma
 Donate link: https://surbma.com/donate/
-Tags: popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
+Tags: age verify, age verification, age, popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 2.1.0
+Stable tag: 2.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Shows a popup with Yes/No options. One of the best plugin for +18 adult sites or any sites, that requires any confirmation from a visitor.
+Shows a popup with age verification options. One of the best plugin for +18 adult sites or any sites, that requires any confirmation from a visitor.
 
 == Description ==
 
-This plugin is showing a Yes/No Popup for visitors on your page. YES button will close the Popup and visitors can continue reading your content. NO button will redirect visitors to another URL, set by you to inform them about your policy.
+This plugin is showing a Popup for visitors to verify their ages on your page. YES button will close the Popup and visitors can continue reading your content. NO button will redirect visitors to another URL, set by you to inform them about your policy.
 
 This plugin can be used on 18+ adult sites, restricted content websites or any websites, where a visitor confirmation about age, knowledge, warning is necessary to continue reading the website. Even can be used for online marketing tricks.
 
@@ -53,7 +53,7 @@ You can donate me for FREE here: [Surbma.com](http://surbma.com/donate/)
 == Installation ==
 
 1. Upload `surbma-yes-no-popup` folder to the `/wp-content/plugins/` directory
-2. Activate the Surbma - Yes/No Popup plugin through the 'Plugins' menu in WordPress
+2. Activate the Surbma - Age Verification Yes/No Popup plugin through the 'Plugins' menu in WordPress
 3. Go to settings page: Settings -> Yes/No Popup
 4. Set the Popup content and display options.
 5. That's it. :)
@@ -69,6 +69,11 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 2.2 =
+
+- NEW - Simple versioning.
+- NEW - Plugin name change: Surbma | Age Verification Yes/No Popup
 
 = 2.1.0 =
 
