@@ -5,7 +5,7 @@ Plugin Name: Surbma | Age Verification Yes/No Popup
 Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Shows a popup with Yes/No options
 
-Version: 2.2
+Version: 3.0
 
 Author: Surbma
 Author URI: http://surbma.com/
@@ -62,15 +62,11 @@ function surbma_yes_no_popup_show() {
 		if( $options['popupshowarchive'] == 1 && is_archive() ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 		}
-		if( $options['popupshowallposts'] == 1 && $options['popupshowposts'] == '' && is_singular( 'post' ) ) {
-			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
-		}
-		if( $options['popupshowallpages'] == 1 && $options['popupshowpages'] == '' && is_page() ) {
-			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
-		}
-		$includeposttypes = $options['popupshowposttypes'] ? explode( ',', $options['popupshowposttypes'] ) : '';
-		if( $options['popupshowposttypes'] != '' && $options['popupshowposts'] == '' && is_singular( $includeposttypes ) ) {
-			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $post_type ) {
+			$popupshowcpt = 'popupshowcpt-' . $post_type->name;
+			if( isset( $options[$popupshowcpt] ) && $options[$popupshowcpt] != '' && is_singular( $post_type->name ) ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
 		}
 		$includeposts = $options['popupshowposts'] ? explode( ',', $options['popupshowposts'] ) : '';
 		if( $options['popupshowposts'] != '' && is_single( $includeposts ) ) {

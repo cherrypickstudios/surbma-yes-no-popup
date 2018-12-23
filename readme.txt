@@ -3,8 +3,8 @@ Contributors: Surbma
 Donate link: https://surbma.com/donate/
 Tags: age verify, age verification, age, popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.0
-Tested up to: 4.9
-Stable tag: 2.2
+Tested up to: 5.0
+Stable tag: 3.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,11 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 3.0 =
+
+- NEW - Dynamic post type selection. Automatically shows all available public post types to choose. IMPORTANT! You have to set these options again after the upgrade!
+- Tested with WordPress 5.0 version.
 
 = 2.2 =
 
