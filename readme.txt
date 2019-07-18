@@ -1,11 +1,12 @@
-=== Surbma | Age Verification Yes/No Popup ===
-Contributors: Surbma
+=== CPS | Age Verification ===
+Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
 Tags: age verify, age verification, age, popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
-Requires at least: 4.0
-Tested up to: 5.0
-Stable tag: 3.0
-License: GPLv2
+Requires at least: 4.9
+Tested up to: 5.2
+Stable tag: 4.0
+Requires PHP: 5.6
+License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Shows a popup with age verification options. One of the best plugin for +18 adult sites or any sites, that requires any confirmation from a visitor.
@@ -23,6 +24,8 @@ This plugin can be an alternative for other Cookie Notice plugins to inform user
 **POPUP POSITIONS:** You can set where to show the popup, for example: only on frontpage, only on category pages, only on special pages or posts, even for Custom Post Types and more...
 
 **FULL CUSTOMIZATIONS:** Every text is customizable, even the button's texts! You can also set the design of the buttons and you have the option to make the first or the second button to be the confirmation button.
+
+**STYLES:** There are popup styles to choose the design, you like.
 
 **THEMES:** There are popup themes to choose the design, you like. The Full Page Themes are hiding the entire content behind the popup.
 
@@ -69,6 +72,30 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 4.0 =
+
+Release date: 2019-07-18
+
+Welcome in the CPS world! Plugin is rebranded for Cherry Pick Studios brand. This release added a new popup image option to show an image or logo on the popup. There is also a new option to choose the style of the popup window and buttons. The CPS SDK is added to the plugin.
+
+NEW
+- New plugin name and brand.
+- Image field for the popup.
+- Three new style: default, almost flat, gradient.
+
+ENHACEMENTS
+- UIkit framework added to the plugin.
+- UIkit is updated to 2.27.5 version.
+- Javascript functions got unique names to avoid conflicts.
+- The admin function has been switched to CPS SDK.
+- CSS and JS files are moved to assets folder.
+- UIkit framework moved to vendors folder.
+- Admin menu moved under the CPS Plugins main menu.
+
+OTHER
+- Tested with WordPress 5.2 version.
+- Added minimum PHP version requirement.
 
 = 3.0 =
 

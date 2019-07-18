@@ -1,0 +1,61 @@
+// UIkit Fixes
+@modal-z-index: 999999999999;
+@button-large-line-height: 1.6em;
+@button-hover-background: darken(@button-background, 10%);
+@button-primary-hover-background: darken(@button-primary-background, 10%);
+@button-success-hover-background: darken(@button-success-background, 10%);
+@button-danger-hover-background: darken(@button-danger-background, 10%);
+
+#surbma-yes-no-popup {
+
+	.uk-modal-header > :last-child,
+	.uk-modal-footer > :last-child {
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	// Popup Themes
+	&.surbma-yes-no-popup-normal .uk-modal-footer {
+		text-align: right;
+	}
+
+	&.surbma-yes-no-popup-full-page {
+		background: #fff;
+	}
+
+	&.surbma-yes-no-popup-full-page-dark {
+		background: #000;
+	}
+
+	&.surbma-yes-no-popup-full-page .uk-modal-dialog,
+	&.surbma-yes-no-popup-full-page-dark .uk-modal-dialog {
+		box-shadow: none;
+	    text-align: center;
+	}
+
+	&.surbma-yes-no-popup-full-page .uk-modal-header,
+	&.surbma-yes-no-popup-full-page-dark .uk-modal-header,
+	&.surbma-yes-no-popup-full-page .uk-modal-footer,
+	&.surbma-yes-no-popup-full-page-dark .uk-modal-footer {
+		background: transparent;
+		border: none;
+	}
+
+	&.surbma-yes-no-popup-full-page-dark .uk-modal-dialog {
+		background: #000;
+		color: #fff;
+	}
+
+	@media (max-width: @breakpoint-mini-max) {
+
+		.uk-modal-footer .uk-button {
+			width: 100%;
+		}
+
+		.uk-modal-footer .uk-button + .uk-button {
+			margin-top: 10px;
+		}
+
+	}
+
+}

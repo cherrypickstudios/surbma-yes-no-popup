@@ -1,15 +1,16 @@
 <wpml-config>
-    <admin-texts>
-        <key name="surbma_yes_no_popup_fields">
-            <key name="popuptitle" />
-            <key name="popuptext" />
-            <key name="popupbutton1text" />
-            <key name="popupbutton2text" />
-            <key name="popupbuttonurl" />
-            <key name="popupexcepthere" />
-            <key name="popupshowposts" />
-            <key name="popupshowpages" />
-            <key name="popupshowcategories" />
-        </key>
-    </admin-texts>
+	<admin-texts>
+		<key name="surbma_yes_no_popup_fields">
+			<key name="popupimage" />
+			<key name="popuptitle" />
+			<key name="popuptext" />
+			<key name="popupbutton1text" />
+			<key name="popupbutton2text" />
+			<key name="popupbuttonurl" />
+			<key name="popupexcepthere" />
+			<key name="popupshowposts" />
+			<key name="popupshowpages" />
+			<key name="popupshowcategories" />
+		</key>
+	</admin-texts>
 </wpml-config>
