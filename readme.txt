@@ -1,65 +1,133 @@
 === CPS | Age Verification ===
 Contributors: Surbma, CherryPickStudios
 Donate link: https://surbma.com/donate/
-Tags: age verify, age verification, age, popup, cookie, cookie compliance, cookie law, cookies, eu cookie, notice, notification, notify, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
+Tags: age verify, age verification, age, popup, cookie, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.9
 Tested up to: 5.2
-Stable tag: 4.0
+Stable tag: 5.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Shows a popup with age verification options. One of the best plugin for +18 adult sites or any sites, that requires any confirmation from a visitor.
+Shows a popup with age verification options. One of the best plugin for any membership or 18+ adult sites or any sites, that requires confirmation from a visitor.
 
 == Description ==
 
 This plugin is showing a Popup for visitors to verify their ages on your page. YES button will close the Popup and visitors can continue reading your content. NO button will redirect visitors to another URL, set by you to inform them about your policy.
 
-This plugin can be used on 18+ adult sites, restricted content websites or any websites, where a visitor confirmation about age, knowledge, warning is necessary to continue reading the website. Even can be used for online marketing tricks.
+The CPS | Age Verification plugin can be used on 18+ adult sites, restricted content websites or any websites, where a visitor confirmation about age, knowledge, warning is necessary to continue reading the website. Even can be used for online marketing tricks.
 
 This plugin can be an alternative for other Cookie Notice plugins to inform users that your site uses cookies and to comply with the EU cookie law regulations.
 
-**IMPORTANT:** the popup is intentionally obtrusive and can not be closed, except clicking on the yes or no buttons.
+### Cache Proof Technology
 
-**POPUP POSITIONS:** You can set where to show the popup, for example: only on frontpage, only on category pages, only on special pages or posts, even for Custom Post Types and more...
+The CPS | Age Verification plugin is the first cookie notice solution, that is compatible with all kind of cache systems. It even works with all managed WordPress hostings' server side cache solutions.
 
-**FULL CUSTOMIZATIONS:** Every text is customizable, even the button's texts! You can also set the design of the buttons and you have the option to make the first or the second button to be the confirmation button.
+**IMPORTANT:** the popup is intentionally obtrusive and can not be closed, except clicking on the yes or no buttons. In the Premium version, you can enable the close function, but it is not recommended.
 
-**STYLES:** There are popup styles to choose the design, you like.
+### Free version features
 
-**THEMES:** There are popup themes to choose the design, you like. The Full Page Themes are hiding the entire content behind the popup.
+- Popup Positions
+- Customizations
+- Developer Friendly
+- WPML & Polylang Compatible
 
-**FULL CONTROL:** Set cookie expiration for visitors, so the popup won't show again in X days, you set.
+### Additional features in the Pro version
 
-**MEMBERSHIP MODE:** You can disable popup for logged in users, so your members will not see any popups at all. You can always show the popup to all visitors, who are not logged in, even if they clicked on the Yes button. There is a "One button mode" also, that will hide the second button, so you can show only one option to your visitors. This option is best paired with the "always show to all visitors, who are not logged in" option, so you can keep your content safe.
+- Header Image Field
+- Set Background Image
+- Popup Styles
+- Popup Themes
+- Button Styles
+- Dark mode
+- Other Customizations
+- Membership Mode
+- Close Popup
+- Popup Delay
+- Cookie Control
 
-**DEVELOPER FRIENDLY:** If you enable debug mode, popup will show always, on every refresh, so you can test how it works.
+### Features in details
 
-**Do you want to contribute or help improving this plugin?**
+#### Popup Positions
+You can set where to show the popup, for example: only on frontpage, only on category pages, only on special pages or posts, even for Custom Post Types and more...
 
-You can find it on GitHub: [https://github.com/Surbma/surbma-yes-no-popup](https://github.com/Surbma/surbma-yes-no-popup)
+#### Customizations
+Every text is customizable, even the button's texts! You can also set the design of the buttons and you have the option to make the first or the second button to be the confirmation button.
 
-**You can find my other plugins and projects on GitHub:**
+#### Developer Friendly
+If you enable debug mode, popup will show always, on every refresh, so you can test how it works.
 
-[https://github.com/Surbma](https://github.com/Surbma)
+#### WPML & Polylang Compatible
+If you have a multilingual website, you can set the texts for each language with WPML String Translation add-on.
 
-Please feel free to contribute, help or recommend any new features for my plugins, themes and other projects.
+#### Header Image Field
 
-**Do you want to know more about me?**
+#### Set Background Image
 
-Visit my webpage: [Surbma.com](http://surbma.com/)
+#### Popup Styles
+There are popup styles to choose the look and feel of the popup: Default, Almost Flat and Gradient. Fit the style to your website easily.
 
-**Do you like and use my free plugins?**
+#### Popup Themes
+There are popup themes to choose the design, you like. The Full Page Themes are hiding the entire content behind the popup. There are a lot of design settings to make the popup fit your website design. Dark mode is also available.
 
-You can donate me for FREE here: [Surbma.com](http://surbma.com/donate/)
+#### Button Styles
+
+#### Dark mode
+
+#### Membership Mode
+You can disable popup for logged in users, so your members will not see any popups at all. You can always show the popup to all visitors, who are not logged in, even if they clicked on the Yes button. There is a "One button mode" also, that will hide the second button, so you can show only one option to your visitors. This option is best paired with the "always show to all visitors, who are not logged in" option, so you can keep your content safe.
+
+#### Close Popup
+
+#### Popup Delay
+
+#### Cookie Control
+Set cookie expiration for visitors, so the popup won't show again in X days, you set.
+
+### Developer informations
+
+#### De you want to contribute to the plugin development?
+
+You can find the plugin source code on GitHub:
+
+- [https://github.com/cherrypickstudios/surbma-yes-no-popup](https://github.com/cherrypickstudios/surbma-yes-no-popup)
+
+#### More projects on GitHub:
+
+- [https://github.com/CherryPickStudios](https://github.com/CherryPickStudios)
+
+You are welcome to contribute to our free softwares.
+
+#### Want to know more about us?
+
+Check our website: [Cherry Pick Studios](https://www.cherrypickstudios.com/)
 
 == Installation ==
 
-1. Upload `surbma-yes-no-popup` folder to the `/wp-content/plugins/` directory
-2. Activate the Surbma - Age Verification Yes/No Popup plugin through the 'Plugins' menu in WordPress
-3. Go to settings page: Settings -> Yes/No Popup
-4. Set the Popup content and display options.
-5. That's it. :)
+### Automatic installation
+
+1. Search for the plugin *CPS | Age Verification* under "Plugins -> Add New" menu item.
+2. Click on the "Install Now" button in the plugin's box.
+3. After installation, click on the "Activate" button in the same box to activate *CPS | Age Verification* plugin.
+4. Under the plugin's settings menu, set up the popup.
+5. That's all. :)
+
+### Manual installation on WordPress admin
+
+1. Download the plugin from here: [CPS | Age Verification](https://downloads.wordpress.org/plugin/surbma-yes-no-popup.zip)
+2. Upload the `surbma-yes-no-popup.zip` file on the "Plugins -> Add New" page by clicking on the "Upload Plugin" button.
+3. Activate the *CPS | Age Verification* plugin after the upload.
+4. Under the plugin's settings menu, set up the popup.
+5. That's all. :)
+
+### Manual installation via FTP
+
+1. Download the plugin from here: [CPS | Age Verification](https://downloads.wordpress.org/plugin/surbma-yes-no-popup.zip)
+2. Uncompress the zip file on your local computer.
+3. Upload the `surbma-yes-no-popup` folder into your `/wp-content/plugins/` folder.
+4. Activate the *CPS | Age Verification* plugin on the "Plugins" page.
+4. Under the plugin's settings menu, set up the popup.
+6. That's all. :)
 
 == Frequently Asked Questions ==
 
@@ -73,6 +141,36 @@ It is the reverse version of my last name. ;)
 
 == Changelog ==
 
+= 5.0 =
+
+Release date: 2019-07-24
+
+The Age Verification Premium is here! There are a lot of new and fantastic features to manage and design your Age Verification popup. Please consider to buy the Premium version not only for the new features, but for supporting our work.
+
+IMPORTANT! A lot of new codes are added and modified. The logic of the design is changed under the hood. There are options also, that were moved to Premium only features. These options can not be changed in the free version, but you can keep your current options without losing it.
+
+NEW
+
+- New premium options added to the admin.
+- PRO - Add Image to the header.
+- PRO - Add background image to the popup.
+- PRO - A lot of cool design features added, like Dark mode, Vertical centering, Large modifier, etc.
+- PRO - You can enable closing the popup with a button, ESC or clicking on the background.
+- PRO - Give delay to the popup.
+
+ENHANCEMENTS
+
+- Code optimization from the ground up.
+- A lot of security hardening for input elements.
+- Validation enhancements.
+- Added new field for WPML translation.
+
+OTHER
+
+- Changes in the description.
+- Settings page sidebar changes.
+- Welcome notice added.
+
 = 4.0 =
 
 Release date: 2019-07-18
@@ -80,11 +178,13 @@ Release date: 2019-07-18
 Welcome in the CPS world! Plugin is rebranded for Cherry Pick Studios brand. This release added a new popup image option to show an image or logo on the popup. There is also a new option to choose the style of the popup window and buttons. The CPS SDK is added to the plugin.
 
 NEW
+
 - New plugin name and brand.
 - Image field for the popup.
 - Three new style: default, almost flat, gradient.
 
 ENHACEMENTS
+
 - UIkit framework added to the plugin.
 - UIkit is updated to 2.27.5 version.
 - Javascript functions got unique names to avoid conflicts.
@@ -94,6 +194,7 @@ ENHACEMENTS
 - Admin menu moved under the CPS Plugins main menu.
 
 OTHER
+
 - Tested with WordPress 5.2 version.
 - Added minimum PHP version requirement.
 

@@ -1,6 +1,5 @@
 <?php
 
-add_action( 'admin_init', 'surbma_yes_no_popup_fields_init' );
 function surbma_yes_no_popup_fields_init() {
 	register_setting(
 		'surbma_yes_no_popup_options',
@@ -8,12 +7,7 @@ function surbma_yes_no_popup_fields_init() {
 		'surbma_yes_no_popup_fields_validate'
 	);
 }
-
-// UPLOAD ENGINE
-function load_wp_media_files() {
-	wp_enqueue_media();
-}
-add_action( 'admin_enqueue_scripts', 'load_wp_media_files' );
+add_action( 'admin_init', 'surbma_yes_no_popup_fields_init' );
 
 /**
  * Create arrays for our select and radio options
@@ -67,6 +61,63 @@ $popupbutton2sstyle_options = array(
 	)
 );
 
+$popupbuttonsize_options = array(
+	'mini' => array(
+		'value' => 'mini',
+		'label' => __( 'Mini', 'surbma-yes-no-popup' )
+	),
+	'small' => array(
+		'value' => 'small',
+		'label' => __( 'Small', 'surbma-yes-no-popup' )
+	),
+	'default' => array(
+		'value' => 'default',
+		'label' => __( 'Default', 'surbma-yes-no-popup' )
+	),
+	'large' => array(
+		'value' => 'large',
+		'label' => __( 'Large', 'surbma-yes-no-popup' )
+	)
+);
+
+$popupbuttonalignment_options = array(
+	'left' => array(
+		'value' => 'left',
+		'label' => __( 'Left', 'surbma-yes-no-popup' )
+	),
+	'center' => array(
+		'value' => 'center',
+		'label' => __( 'Center', 'surbma-yes-no-popup' )
+	),
+	'right' => array(
+		'value' => 'right',
+		'label' => __( 'Right', 'surbma-yes-no-popup' )
+	)
+);
+
+$popupimagealignment_options = array(
+	'left' => array(
+		'value' => 'left',
+		'label' => __( 'Left', 'surbma-yes-no-popup' )
+	),
+	'center' => array(
+		'value' => 'center',
+		'label' => __( 'Center', 'surbma-yes-no-popup' )
+	),
+	'right' => array(
+		'value' => 'right',
+		'label' => __( 'Right', 'surbma-yes-no-popup' )
+	),
+	'float-left' => array(
+		'value' => 'float-left',
+		'label' => __( 'Float Left', 'surbma-yes-no-popup' )
+	),
+	'float-right' => array(
+		'value' => 'float-right',
+		'label' => __( 'Float Right', 'surbma-yes-no-popup' )
+	)
+);
+
 $popup_styles = array(
 	'default' => array(
 		'value' => 'default',
@@ -94,12 +145,17 @@ $popup_themes = array(
 );
 
 function surbma_yes_no_popup_settings_page() {
-
 	global $popupbuttons_options;
 	global $popupbutton1sstyle_options;
 	global $popupbutton2sstyle_options;
+	global $popupbuttonsize_options;
+	global $popupbuttonalignment_options;
+	global $popupimagealignment_options;
 	global $popup_styles;
 	global $popup_themes;
+
+	$freeNotification = SURBMA_YES_NO_POPUP_PLUGIN_VERSION == 'free' || SURBMA_YES_NO_POPUP_PLUGIN_LICENSE != 'valid' ? '<div class="uk-alert-danger uk-text-center" uk-alert><strong>' . __( 'Inactive options are available in the Premium Version of this plugin with an Active License.', 'surbma-yes-no-popup' ) . '</strong></div>' : '';
+	$disabled = SURBMA_YES_NO_POPUP_PLUGIN_VERSION == 'free' || SURBMA_YES_NO_POPUP_PLUGIN_LICENSE != 'valid' ? ' disabled' : '';
 
 ?>
 <div class="cps-admin">
@@ -120,16 +176,17 @@ function surbma_yes_no_popup_settings_page() {
 							<h3 class="uk-card-title"><?php _e( 'Popup Content', 'surbma-yes-no-popup' ); ?> <a class="uk-float-right uk-margin-small-top" uk-icon="icon: more-vertical" uk-toggle="target: #popup-content"></a></h3>
 						</div>
 						<div id="popup-content" class="uk-card-body">
-							<div class="uk-margin">
+							<?php echo $freeNotification; ?>
+							<div class="uk-margin<?php echo $disabled; ?>">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupimage]"><?php _e( 'Popup Image', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
 									<div class="uk-grid-small" uk-grid>
 										<div class="uk-width-expand">
 											<?php $popupimageValue = isset( $options['popupimage'] ) ? $options['popupimage'] : ''; ?>
-											<input id="popupimage" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupimage]" value="<?php echo stripslashes( $popupimageValue ); ?>" />
+											<input id="popupimage" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupimage]" value="<?php echo stripslashes( $popupimageValue ); ?>"<?php echo $disabled; ?> />
 										</div>
 										<div class="uk-width-auto">
-											<button id="upload-popupimage" class="uk-button uk-button-default uk-width-1-1"><span uk-icon="icon: image;ratio: .75"></span>&nbsp; <?php _e( 'Upload', 'surbma-yes-no-popup' ); ?></button>
+											<button id="upload-popupimage" class="uk-button uk-button-default uk-width-1-1"<?php echo $disabled; ?>><span uk-icon="icon: image;ratio: .75"></span>&nbsp; <?php _e( 'Upload', 'surbma-yes-no-popup' ); ?></button>
 										</div>
 									</div>
 								</div>
@@ -150,55 +207,13 @@ function surbma_yes_no_popup_settings_page() {
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbutton1text]"><?php _e( 'Popup Button 1 Text', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupbutton1text" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbutton1text]" value="<?php esc_attr_e( $options['popupbutton1text'] ); ?>" />
-								</div>
-							</div>
-							<div class="uk-margin">
-								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbutton1style]"><?php _e( 'Popup Button 1 Style', 'surbma-yes-no-popup' ); ?></label>
-								<div class="uk-form-controls">
-									<select class="uk-select" name="surbma_yes_no_popup_fields[popupbutton1style]">
-										<?php
-											$selected = $options['popupbutton1style'];
-											$p = '';
-											$r = '';
-
-											foreach ( $popupbutton1sstyle_options as $option ) {
-												$label = $option['label'];
-												if ( $selected == $option['value'] ) // Make default first in list
-													$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
-												else
-													$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
-											}
-											echo $p . $r;
-										?>
-									</select>
+									<input id="popupbutton1text" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbutton1text]" value="<?php echo stripslashes( $options['popupbutton1text'] ); ?>" />
 								</div>
 							</div>
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbutton2text]"><?php _e( 'Popup Button 2 Text', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupbutton2text" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbutton2text]" value="<?php esc_attr_e( $options['popupbutton2text'] ); ?>" />
-								</div>
-							</div>
-							<div class="uk-margin">
-								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbutton2style]"><?php _e( 'Popup Button 2 Style', 'surbma-yes-no-popup' ); ?></label>
-								<div class="uk-form-controls">
-									<select class="uk-select" name="surbma_yes_no_popup_fields[popupbutton2style]">
-										<?php
-											$selected = $options['popupbutton2style'];
-											$p = '';
-											$r = '';
-
-											foreach ( $popupbutton2sstyle_options as $option ) {
-												$label = $option['label'];
-												if ( $selected == $option['value'] ) // Make default first in list
-													$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
-												else
-													$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
-											}
-											echo $p . $r;
-										?>
-									</select>
+									<input id="popupbutton2text" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbutton2text]" value="<?php echo stripslashes( $options['popupbutton2text'] ); ?>" />
 								</div>
 							</div>
 							<div class="uk-margin">
@@ -207,10 +222,10 @@ function surbma_yes_no_popup_settings_page() {
 									<input id="popupbuttonurl" class="uk-input" type="url" name="surbma_yes_no_popup_fields[popupbuttonurl]" value="<?php esc_attr_e( $options['popupbuttonurl'] ); ?>" />
 								</div>
 							</div>
-							<div class="uk-margin">
+							<div class="uk-margin<?php echo $disabled; ?>">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbuttonoptions]"><?php _e( 'Popup Button Options', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<select class="uk-select" name="surbma_yes_no_popup_fields[popupbuttonoptions]">
+									<select class="uk-select" name="surbma_yes_no_popup_fields[popupbuttonoptions]"<?php echo $disabled; ?>>
 										<?php
 											$selected = $options['popupbuttonoptions'];
 											$p = '';
@@ -230,7 +245,7 @@ function surbma_yes_no_popup_settings_page() {
 							</div>
 						</div>
 						<div class="uk-card-footer">
-							<p><input type="submit" class="button--primary uk-button uk-button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
+							<p><input type="submit" class="uk-button uk-button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
 						</div>
 					</div>
 
@@ -239,10 +254,47 @@ function surbma_yes_no_popup_settings_page() {
 							<h3 class="uk-card-title"><?php _e( 'Popup Design', 'surbma-yes-no-popup' ); ?> <a class="uk-float-right uk-margin-small-top" uk-icon="icon: more-vertical" uk-toggle="target: #popup-design"></a></h3>
 						</div>
 						<div id="popup-design" class="uk-card-body">
-							<div class="uk-margin">
+							<?php echo $freeNotification; ?>
+							<div class="uk-margin<?php echo $disabled; ?>">
+								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupimagealignment]"><?php _e( 'Image Alignment', 'surbma-yes-no-popup' ); ?></label>
+								<div class="uk-form-controls">
+									<select class="uk-select" name="surbma_yes_no_popup_fields[popupimagealignment]"<?php echo $disabled; ?>>
+										<?php
+											$popupimagealignmentValue = isset( $options['popupimagealignment'] ) ? $options['popupimagealignment'] : 'left';
+											$selected = $popupimagealignmentValue;
+											$p = '';
+											$r = '';
+
+											foreach ( $popupimagealignment_options as $option ) {
+												$label = $option['label'];
+												if ( $selected == $option['value'] ) // Make default first in list
+													$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												else
+													$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											}
+											echo $p . $r;
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="uk-margin<?php echo $disabled; ?>">
+								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbackgroundimage]"><?php _e( 'Popup Background', 'surbma-yes-no-popup' ); ?></label>
+								<div class="uk-form-controls">
+									<div class="uk-grid-small" uk-grid>
+										<div class="uk-width-expand">
+											<?php $popupbackgroundimageValue = isset( $options['popupbackgroundimage'] ) ? $options['popupbackgroundimage'] : ''; ?>
+											<input id="popupbackgroundimage" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbackgroundimage]" value="<?php echo stripslashes( $popupbackgroundimageValue ); ?>"<?php echo $disabled; ?> />
+										</div>
+										<div class="uk-width-auto">
+											<button id="upload-popupbackgroundimage" class="uk-button uk-button-default uk-width-1-1"<?php echo $disabled; ?>><span uk-icon="icon: image;ratio: .75"></span>&nbsp; <?php _e( 'Upload', 'surbma-yes-no-popup' ); ?></button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="uk-margin<?php echo $disabled; ?>">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupstyles]"><?php _e( 'Styles', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<select class="uk-select" name="surbma_yes_no_popup_fields[popupstyles]">
+									<select class="uk-select" name="surbma_yes_no_popup_fields[popupstyles]"<?php echo $disabled; ?>>
 										<?php
 											$popupstylesValue = isset( $options['popupstyles'] ) ? $options['popupstyles'] : 'default';
 											$selected = $popupstylesValue;
@@ -261,10 +313,10 @@ function surbma_yes_no_popup_settings_page() {
 									</select>
 								</div>
 							</div>
-							<div class="uk-margin">
+							<div class="uk-margin<?php echo $disabled; ?>">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupthemes]"><?php _e( 'Themes', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<select class="uk-select" name="surbma_yes_no_popup_fields[popupthemes]">
+									<select class="uk-select" name="surbma_yes_no_popup_fields[popupthemes]"<?php echo $disabled; ?>>
 										<?php
 											$selected = $options['popupthemes'];
 											$p = '';
@@ -282,14 +334,14 @@ function surbma_yes_no_popup_settings_page() {
 									</select>
 								</div>
 							</div>
-							<div class="uk-margin">
+							<div class="uk-margin<?php echo $disabled; ?>">
 								<div class="uk-form-label"><?php _e( 'Display options', 'surbma-yes-no-popup' ); ?></div>
 								<div class="uk-form-controls">
 									<p class="switch-wrap">
 										<?php _e( 'Dark mode', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
 											<?php $popupdarkmodeValue = isset( $options['popupdarkmode'] ) ? $options['popupdarkmode'] : 0; ?>
-											<input id="popupdarkmode" name="surbma_yes_no_popup_fields[popupdarkmode]" type="checkbox" value="1" <?php checked( '1', $popupdarkmodeValue); ?> />
+											<input id="popupdarkmode" name="surbma_yes_no_popup_fields[popupdarkmode]" type="checkbox" value="1" <?php checked( '1', $popupdarkmodeValue); ?><?php echo $disabled; ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
@@ -297,7 +349,7 @@ function surbma_yes_no_popup_settings_page() {
 										<?php _e( 'Center text alignment', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
 											<?php $popupcentertextValue = isset( $options['popupcentertext'] ) ? $options['popupcentertext'] : 0; ?>
-											<input id="popupcentertext" name="surbma_yes_no_popup_fields[popupcentertext]" type="checkbox" value="1" <?php checked( '1', $popupcentertextValue); ?> />
+											<input id="popupcentertext" name="surbma_yes_no_popup_fields[popupcentertext]" type="checkbox" value="1" <?php checked( '1', $popupcentertextValue); ?><?php echo $disabled; ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
@@ -305,7 +357,7 @@ function surbma_yes_no_popup_settings_page() {
 										<?php _e( 'Vertically center the Popup', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
 											<?php $popupverticalcenterValue = isset( $options['popupverticalcenter'] ) ? $options['popupverticalcenter'] : 0; ?>
-											<input id="popupverticalcenter" name="surbma_yes_no_popup_fields[popupverticalcenter]" type="checkbox" value="1" <?php checked( '1', $popupverticalcenterValue); ?> />
+											<input id="popupverticalcenter" name="surbma_yes_no_popup_fields[popupverticalcenter]" type="checkbox" value="1" <?php checked( '1', $popupverticalcenterValue); ?><?php echo $disabled; ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
@@ -313,15 +365,101 @@ function surbma_yes_no_popup_settings_page() {
 										<?php _e( 'Large modifier', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
 											<?php $popuplargeValue = isset( $options['popuplarge'] ) ? $options['popuplarge'] : 0; ?>
-											<input id="popuplarge" name="surbma_yes_no_popup_fields[popuplarge]" type="checkbox" value="1" <?php checked( '1', $popuplargeValue); ?> />
+											<input id="popuplarge" name="surbma_yes_no_popup_fields[popuplarge]" type="checkbox" value="1" <?php checked( '1', $popuplargeValue); ?><?php echo $disabled; ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
 								</div>
 							</div>
+							<div class="uk-margin<?php echo $disabled; ?>">
+								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbutton1style]"><?php _e( 'Popup Button 1 Style', 'surbma-yes-no-popup' ); ?></label>
+								<div class="uk-form-controls">
+									<select class="uk-select" name="surbma_yes_no_popup_fields[popupbutton1style]"<?php echo $disabled; ?>>
+										<?php
+											$selected = $options['popupbutton1style'];
+											$p = '';
+											$r = '';
+
+											foreach ( $popupbutton1sstyle_options as $option ) {
+												$label = $option['label'];
+												if ( $selected == $option['value'] ) // Make default first in list
+													$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												else
+													$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											}
+											echo $p . $r;
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="uk-margin<?php echo $disabled; ?>">
+								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbutton2style]"><?php _e( 'Popup Button 2 Style', 'surbma-yes-no-popup' ); ?></label>
+								<div class="uk-form-controls">
+									<select class="uk-select" name="surbma_yes_no_popup_fields[popupbutton2style]"<?php echo $disabled; ?>>
+										<?php
+											$selected = $options['popupbutton2style'];
+											$p = '';
+											$r = '';
+
+											foreach ( $popupbutton2sstyle_options as $option ) {
+												$label = $option['label'];
+												if ( $selected == $option['value'] ) // Make default first in list
+													$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												else
+													$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											}
+											echo $p . $r;
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="uk-margin<?php echo $disabled; ?>">
+								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbuttonsize]"><?php _e( 'Button Size', 'surbma-yes-no-popup' ); ?></label>
+								<div class="uk-form-controls">
+									<select class="uk-select" name="surbma_yes_no_popup_fields[popupbuttonsize]"<?php echo $disabled; ?>>
+										<?php
+											$popupbuttonsizeValue = isset( $options['popupbuttonsize'] ) ? $options['popupbuttonsize'] : 'large';
+											$selected = $popupbuttonsizeValue;
+											$p = '';
+											$r = '';
+
+											foreach ( $popupbuttonsize_options as $option ) {
+												$label = $option['label'];
+												if ( $selected == $option['value'] ) // Make default first in list
+													$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												else
+													$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											}
+											echo $p . $r;
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="uk-margin<?php echo $disabled; ?>">
+								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbuttonalignment]"><?php _e( 'Button Alignment', 'surbma-yes-no-popup' ); ?></label>
+								<div class="uk-form-controls">
+									<select class="uk-select" name="surbma_yes_no_popup_fields[popupbuttonalignment]"<?php echo $disabled; ?>>
+										<?php
+											$popupbuttonalignmentValue = isset( $options['popupbuttonalignment'] ) ? $options['popupbuttonalignment'] : 'left';
+											$selected = $popupbuttonalignmentValue;
+											$p = '';
+											$r = '';
+
+											foreach ( $popupbuttonalignment_options as $option ) {
+												$label = $option['label'];
+												if ( $selected == $option['value'] ) // Make default first in list
+													$p = "\n\t<option style=\"padding-right: 10px;\" selected='selected' value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+												else
+													$r .= "\n\t<option style=\"padding-right: 10px;\" value='" . esc_attr( $option['value'] ) . "'>$label</option>";
+											}
+											echo $p . $r;
+										?>
+									</select>
+								</div>
+							</div>
 						</div>
 						<div class="uk-card-footer">
-							<p><input type="submit" class="button--primary uk-button uk-button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
+							<p><input type="submit" class="uk-button uk-button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
 						</div>
 					</div>
 
@@ -330,38 +468,44 @@ function surbma_yes_no_popup_settings_page() {
 							<h3 class="uk-card-title"><?php _e( 'Popup Display', 'surbma-yes-no-popup' ); ?> <a class="uk-float-right uk-margin-small-top" uk-icon="icon: more-vertical" uk-toggle="target: #popup-display"></a></h3>
 						</div>
 						<div id="popup-display" class="uk-card-body">
+							<?php echo $freeNotification; ?>
 							<div class="uk-margin">
 								<div class="uk-form-label"><?php _e( 'Where to show PopUp?', 'surbma-yes-no-popup' ); ?></div>
 								<div class="uk-form-controls">
 									<p class="switch-wrap">
 										<?php _e( 'EVERYWHERE', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
-											<input id="popupshoweverywhere" name="surbma_yes_no_popup_fields[popupshoweverywhere]" type="checkbox" value="1" <?php checked( '1', $options['popupshoweverywhere'] ); ?> />
+											<?php $popupshoweverywhereValue = isset( $options['popupshoweverywhere'] ) ? $options['popupshoweverywhere'] : 0; ?>
+											<input id="popupshoweverywhere" name="surbma_yes_no_popup_fields[popupshoweverywhere]" type="checkbox" value="1" <?php checked( '1', $popupshoweverywhereValue ); ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
 									<p><?php _e( 'Except on this page', 'surbma-yes-no-popup' ); ?>:
-									<input id="popupexcepthere" class="uk-input uk-form-width-small" type="number" name="surbma_yes_no_popup_fields[popupexcepthere]" value="<?php esc_attr_e( $options['popupexcepthere'] ); ?>" placeholder="ID" /> (<?php _e( 'You can give only ONE PAGE ID!', 'surbma-yes-no-popup' ); ?>)</p>
+									<?php $popupexcepthereValue = isset( $options['popupexcepthere'] ) ? $options['popupexcepthere'] : NULL; ?>
+									<input id="popupexcepthere" class="uk-input uk-form-width-small" type="number" name="surbma_yes_no_popup_fields[popupexcepthere]" value="<?php esc_attr_e( $popupexcepthereValue ); ?>" placeholder="ID" /> (<?php _e( 'You can give only ONE PAGE ID!', 'surbma-yes-no-popup' ); ?>)</p>
 									<p class="uk-text-meta"><?php _e( 'If this option is enabled, all other options below will be ignored!', 'surbma-yes-no-popup' ); ?></p>
 									<hr>
 									<p class="switch-wrap">
 										<?php _e( 'Frontpage', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
-											<input id="popupshowfrontpage" name="surbma_yes_no_popup_fields[popupshowfrontpage]" type="checkbox" value="1" <?php checked( '1', $options['popupshowfrontpage'] ); ?> />
+											<?php $popupshowfrontpageValue = isset( $options['popupshowfrontpage'] ) ? $options['popupshowfrontpage'] : 0; ?>
+											<input id="popupshowfrontpage" name="surbma_yes_no_popup_fields[popupshowfrontpage]" type="checkbox" value="1" <?php checked( '1', $popupshowfrontpageValue ); ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
 									<p class="switch-wrap">
 										<?php _e( 'Blog', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
-											<input id="popupshowblog" name="surbma_yes_no_popup_fields[popupshowblog]" type="checkbox" value="1" <?php checked( '1', $options['popupshowblog'] ); ?> />
+											<?php $popupshowblogValue = isset( $options['popupshowblog'] ) ? $options['popupshowblog'] : 0; ?>
+											<input id="popupshowblog" name="surbma_yes_no_popup_fields[popupshowblog]" type="checkbox" value="1" <?php checked( '1', $popupshowblogValue ); ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
 									<p class="switch-wrap">
 										<?php _e( 'Archive pages', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
-											<input id="popupshowarchive" name="surbma_yes_no_popup_fields[popupshowarchive]" type="checkbox" value="1" <?php checked( '1', $options['popupshowarchive'] ); ?> />
+											<?php $popupshowarchiveValue = isset( $options['popupshowarchive'] ) ? $options['popupshowarchive'] : 0; ?>
+											<input id="popupshowarchive" name="surbma_yes_no_popup_fields[popupshowarchive]" type="checkbox" value="1" <?php checked( '1', $popupshowarchiveValue ); ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
@@ -385,43 +529,49 @@ function surbma_yes_no_popup_settings_page() {
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupshowposts]"><?php _e( 'Only on these posts:', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupshowposts" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupshowposts]" value="<?php esc_attr_e( $options['popupshowposts'] ); ?>" placeholder="IDs, comma separated" />
+									<?php $popupshowpostsValue = isset( $options['popupshowposts'] ) ? $options['popupshowposts'] : NULL; ?>
+									<input id="popupshowposts" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupshowposts]" value="<?php esc_attr_e( $popupshowpostsValue ); ?>" placeholder="IDs, comma separated" />
 								</div>
 							</div>
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupshowpages]"><?php _e( 'Only on these pages:', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupshowpages" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupshowpages]" value="<?php esc_attr_e( $options['popupshowpages'] ); ?>" placeholder="IDs, comma separated" />
+									<?php $popupshowpagesValue = isset( $options['popupshowpages'] ) ? $options['popupshowpages'] : NULL; ?>
+									<input id="popupshowpages" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupshowpages]" value="<?php esc_attr_e( $popupshowpagesValue ); ?>" placeholder="IDs, comma separated" />
 								</div>
 							</div>
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupshowcategories]"><?php _e( 'Only on these category archive pages:', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupshowcategories" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupshowcategories]" value="<?php esc_attr_e( $options['popupshowcategories'] ); ?>" placeholder="Category IDs, comma separated" />
+									<?php $popupshowcategoriesValue = isset( $options['popupshowcategories'] ) ? $options['popupshowcategories'] : NULL; ?>
+									<input id="popupshowcategories" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupshowcategories]" value="<?php esc_attr_e( $popupshowcategoriesValue ); ?>" placeholder="Category IDs, comma separated" />
 									<p class="uk-text-meta"><?php _e( 'This will enable Popup on category archive and all the category post single pages.', 'surbma-yes-no-popup' ); ?></p>
 								</div>
 							</div>
-							<div class="uk-margin">
+							<div class="uk-margin<?php echo $disabled; ?>">
 								<div class="uk-form-label"><?php _e( 'Membership mode', 'surbma-yes-no-popup' ); ?></div>
 								<div class="uk-form-controls">
 									<p class="switch-wrap">
 										<?php _e( 'Hide Popup for logged in users', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
-											<input id="popuphideloggedin" name="surbma_yes_no_popup_fields[popuphideloggedin]" type="checkbox" value="1" <?php checked( '1', $options['popuphideloggedin'] ); ?> />
+											<?php $popuphideloggedinValue = isset( $options['popuphideloggedin'] ) ? $options['popuphideloggedin'] : 0; ?>
+											<input id="popuphideloggedin" name="surbma_yes_no_popup_fields[popuphideloggedin]" type="checkbox" value="1" <?php checked( '1', $popuphideloggedinValue ); ?><?php echo $disabled; ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
 									<p class="switch-wrap">
 										<?php _e( 'Always show Popup for NOT logged in users', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
-											<input id="popupshownotloggedin" name="surbma_yes_no_popup_fields[popupshownotloggedin]" type="checkbox" value="1" <?php checked( '1', $options['popupshownotloggedin'] ); ?> />
+											<?php $popupshownotloggedinValue = isset( $options['popupshownotloggedin'] ) ? $options['popupshownotloggedin'] : 0; ?>
+											<input id="popupshownotloggedin" name="surbma_yes_no_popup_fields[popupshownotloggedin]" type="checkbox" value="1" <?php checked( '1', $popupshownotloggedinValue ); ?><?php echo $disabled; ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
 									<p class="switch-wrap">
 										<?php _e( 'One button mode (Show only Popup Button 1)', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
-											<input id="popuphidebutton2" name="surbma_yes_no_popup_fields[popuphidebutton2]" type="checkbox" value="1" <?php checked( '1', $options['popuphidebutton2'] ); ?> />
+											<?php $popuphidebutton2Value = isset( $options['popuphidebutton2'] ) ? $options['popuphidebutton2'] : 0; ?>
+											<input id="popuphidebutton2" name="surbma_yes_no_popup_fields[popuphidebutton2]" type="checkbox" value="1" <?php checked( '1', $popuphidebutton2Value ); ?><?php echo $disabled; ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
@@ -433,7 +583,8 @@ function surbma_yes_no_popup_settings_page() {
 									<p class="switch-wrap">
 										<?php _e( 'Always show Popup', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
-											<input id="popupdebug" name="surbma_yes_no_popup_fields[popupdebug]" type="checkbox" value="1" <?php checked( '1', $options['popupdebug'] ); ?> />
+											<?php $popupdebugValue = isset( $options['popupdebug'] ) ? $options['popupdebug'] : 0; ?>
+											<input id="popupdebug" name="surbma_yes_no_popup_fields[popupdebug]" type="checkbox" value="1" <?php checked( '1', $popupdebugValue ); ?> />
 											<span class="slider round"></span>
 										</label>
 									</p>
@@ -442,7 +593,7 @@ function surbma_yes_no_popup_settings_page() {
 							</div>
 						</div>
 						<div class="uk-card-footer">
-							<p><input type="submit" class="button--primary uk-button uk-button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
+							<p><input type="submit" class="uk-button uk-button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
 						</div>
 					</div>
 
@@ -451,16 +602,55 @@ function surbma_yes_no_popup_settings_page() {
 							<h3 class="uk-card-title"><?php _e( 'Popup Options', 'surbma-yes-no-popup' ); ?> <a class="uk-float-right uk-margin-small-top" uk-icon="icon: more-vertical" uk-toggle="target: #popup-options"></a></h3>
 						</div>
 						<div id="popup-options" class="uk-card-body">
-							<div class="uk-margin">
+							<?php echo $freeNotification; ?>
+							<div class="uk-margin<?php echo $disabled; ?>">
+								<div class="uk-form-label"><?php _e( 'Close options', 'surbma-yes-no-popup' ); ?></div>
+								<div class="uk-form-controls">
+									<p class="switch-wrap<?php echo $disabled; ?>">
+										<?php _e( 'Close button in popup', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupclosebuttonValue = isset( $options['popupclosebutton'] ) ? $options['popupclosebutton'] : 0; ?>
+											<input id="popupclosebutton" name="surbma_yes_no_popup_fields[popupclosebutton]" type="checkbox" value="1" <?php checked( '1', $popupclosebuttonValue); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									<p class="switch-wrap<?php echo $disabled; ?>">
+										<?php _e( 'Close with keyboard (ESC button)', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupclosekeyboardValue = isset( $options['popupclosekeyboard'] ) ? $options['popupclosekeyboard'] : 0; ?>
+											<input id="popupclosekeyboard" name="surbma_yes_no_popup_fields[popupclosekeyboard]" type="checkbox" value="1" <?php checked( '1', $popupclosekeyboardValue); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									<p class="switch-wrap<?php echo $disabled; ?>">
+										<?php _e( 'Close with a click on the background', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupclosebgcloseValue = isset( $options['popupclosebgclose'] ) ? $options['popupclosebgclose'] : 0; ?>
+											<input id="popupclosebgclose" name="surbma_yes_no_popup_fields[popupclosebgclose]" type="checkbox" value="1" <?php checked( '1', $popupclosebgcloseValue); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									<p class="uk-text-meta"><?php _e( 'Popup close without button click will never disable the popup. Popup will still load on every page.', 'surbma-yes-no-popup' ); ?></p>
+								</div>
+							</div>
+							<div class="uk-margin<?php echo $disabled; ?>">
+								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupdelay]"><?php _e( 'Popup delay', 'surbma-yes-no-popup' ); ?></label>
+								<div class="uk-form-controls">
+									<?php $popupdelayValue = isset( $options['popupdelay'] ) ? $options['popupdelay'] : 0; ?>
+									<input id="popupdelay" class="uk-input uk-form-width-small" type="number" name="surbma_yes_no_popup_fields[popupdelay]" value="<?php echo $popupdelayValue; ?>" placeholder="0"<?php echo $disabled; ?> /> <?php _e( 'seconds', 'surbma-yes-no-popup' ); ?>
+								</div>
+							</div>
+							<div class="uk-margin<?php echo $disabled; ?>">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupcookiedays]"><?php _e( 'Cookie expires in (days):', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupcookiedays" class="uk-input uk-form-width-small" type="number" name="surbma_yes_no_popup_fields[popupcookiedays]" value="<?php esc_attr_e( $options['popupcookiedays'] ); ?>" placeholder="Days" />
+									<?php $popupcookiedaysValue = isset( $options['popupcookiedays'] ) ? $options['popupcookiedays'] : 1; ?>
+									<input id="popupcookiedays" class="uk-input uk-form-width-small" type="number" name="surbma_yes_no_popup_fields[popupcookiedays]" value="<?php esc_attr_e( $popupcookiedaysValue ); ?>" placeholder="Days"<?php echo $disabled; ?> />
 									<p class="uk-text-meta"><?php _e( 'Default value is 1 day.', 'surbma-yes-no-popup' ); ?></p>
 								</div>
 							</div>
 						</div>
 						<div class="uk-card-footer">
-							<p><input type="submit" class="button--primary uk-button uk-button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
+							<p><input type="submit" class="uk-button uk-button-primary" value="<?php _e( 'Save Changes' ); ?>" /></p>
 						</div>
 					</div>
 				</form>
@@ -492,6 +682,23 @@ jQuery(document).ready(function($){
 			$('#popupimage').val(image_url);
 		});
 	});
+	$('#upload-popupbackgroundimage').click(function(e) {
+		e.preventDefault();
+		var image = wp.media({
+			title: 'Upload Image',
+			multiple: false
+		}).open()
+		.on('select', function(e){
+			// This will return the selected image from the Media Uploader, the result is an object
+			var uploaded_image = image.state().get('selection').first();
+			// We convert uploaded_image to a JSON object to make accessing it easier
+			// Output to the console uploaded_image
+			console.log(uploaded_image);
+			var image_url = uploaded_image.toJSON().url;
+			// Let's assign the url value to the input field
+			$('#popupbackgroundimage').val(image_url);
+		});
+	});
 });
 </script>
 <?php
@@ -504,14 +711,21 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	global $popupbuttons_options;
 	global $popupbutton1sstyle_options;
 	global $popupbutton2sstyle_options;
+	global $popupbuttonsize_options;
+	global $popupbuttonalignment_options;
+	global $popupimagealignment_options;
 	global $popup_styles;
 	global $popup_themes;
+
+	$options = get_option( 'surbma_yes_no_popup_fields' );
 
 	// Say our text option must be safe URL
 	$input['popupbuttonurl'] = wp_filter_nohtml_kses( $input['popupbuttonurl'] );
 	$input['popupbuttonurl'] = esc_url_raw( $input['popupbuttonurl'] );
 	$input['popupimage'] = wp_filter_nohtml_kses( $input['popupimage'] );
 	$input['popupimage'] = esc_url_raw( $input['popupimage'] );
+	$input['popupbackgroundimage'] = wp_filter_nohtml_kses( $input['popupbackgroundimage'] );
+	$input['popupbackgroundimage'] = esc_url_raw( $input['popupbackgroundimage'] );
 
 	// Say our text option must be safe text with no HTML tags
 	$input['popuptitle'] = wp_filter_nohtml_kses( $input['popuptitle'] );
@@ -522,7 +736,9 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	$input['popupshowcategories'] = wp_filter_nohtml_kses( str_replace( ' ', '', $input['popupshowcategories'] ) );
 
 	// Say our input option must be only numbers
-	$input['popupexcepthere'] = preg_replace( "/[^0-9]/", "", $input['popupexcepthere'] );
+	$input['popupexcepthere'] = isset( $input['popupexcepthere'] ) ? preg_replace( "/[^0-9]/", "", $input['popupexcepthere'] ) : NULL;
+	$input['popupdelay'] = isset( $input['popupdelay'] ) ? preg_replace( "/[^0-9]/", "", $input['popupdelay'] ) : 0;
+	$input['popupcookiedays'] = isset( $input['popupcookiedays'] ) ? preg_replace( "/[^0-9]/", "", $input['popupcookiedays'] ) : 1;
 
 	// Say our textarea option must be safe text with the allowed tags for posts
 	$input['popuptext'] = wp_filter_post_kses( $input['popuptext'] );
@@ -536,6 +752,9 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	$input['popupshowfrontpage'] = isset( $input['popupshowfrontpage'] ) && $input['popupshowfrontpage'] == 1 ? 1 : 0;
 	$input['popupshowblog'] = isset( $input['popupshowblog'] ) && $input['popupshowblog'] == 1 ? 1 : 0;
 	$input['popupshowarchive'] = isset( $input['popupshowarchive'] ) && $input['popupshowarchive'] == 1 ? 1 : 0;
+	$input['popupclosebutton'] = isset( $input['popupclosebutton'] ) && $input['popupclosebutton'] == 1 ? 1 : 0;
+	$input['popupclosekeyboard'] = isset( $input['popupclosekeyboard'] ) && $input['popupclosekeyboard'] == 1 ? 1 : 0;
+	$input['popupclosebgclose'] = isset( $input['popupclosebgclose'] ) && $input['popupclosebgclose'] == 1 ? 1 : 0;
 
 	foreach ( get_post_types( array( 'public' => true, '_builtin' => false ), 'objects' ) as $post_type ) {
 		$popupshowcpt = 'popupshowcpt-' . $post_type->name;
@@ -549,15 +768,49 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 
 	// Our select option must actually be in our array of select options
 	if ( !array_key_exists( $input['popupbuttonoptions'], $popupbuttons_options ) )
-		$input['popupbuttonoptions'] = null;
+		$input['popupbuttonoptions'] = 'button-1-redirect';
 	if ( !array_key_exists( $input['popupbutton1style'], $popupbutton1sstyle_options ) )
-		$input['popupbutton1style'] = null;
+		$input['popupbutton1style'] = 'default';
 	if ( !array_key_exists( $input['popupbutton2style'], $popupbutton2sstyle_options ) )
-		$input['popupbutton2style'] = null;
+		$input['popupbutton2style'] = 'primary';
+	if ( !array_key_exists( $input['popupbuttonsize'], $popupbuttonsize_options ) )
+		$input['popupbuttonsize'] = 'large';
+	if ( !array_key_exists( $input['popupbuttonalignment'], $popupbuttonalignment_options ) )
+		$input['popupbuttonalignment'] = 'left';
+	if ( !array_key_exists( $input['popupimagealignment'], $popupimagealignment_options ) )
+		$input['popupimagealignment'] = 'left';
 	if ( !array_key_exists( $input['popupstyles'], $popup_styles ) )
 		$input['popupstyles'] = 'default';
 	if ( !array_key_exists( $input['popupthemes'], $popup_themes ) )
 		$input['popupthemes'] = null;
+
+	// If no valid license, check if field has any value. If yes, save it, if no, set to default.
+	if ( SURBMA_YES_NO_POPUP_PLUGIN_VERSION == 'free' || SURBMA_YES_NO_POPUP_PLUGIN_LICENSE != 'valid' ) {
+		$input['popupimage'] = isset( $options['popupimage'] ) ? $options['popupimage'] : '';
+		$input['popupbuttonoptions'] = isset( $options['popupbuttonoptions'] ) ? $options['popupbuttonoptions'] : 'button-1-redirect';
+
+		$input['popupimagealignment'] = isset( $options['popupimagealignment'] ) ? $options['popupimagealignment'] : 'left';
+		$input['popupbackgroundimage'] = isset( $options['popupbackgroundimage'] ) ? $options['popupbackgroundimage'] : '';
+		$input['popupstyles'] = isset( $options['popupstyles'] ) ? $options['popupstyles'] : 'default';
+		$input['popupthemes'] = isset( $options['popupthemes'] ) ? $options['popupthemes'] : 'normal';
+		$input['popupdarkmode'] = isset( $options['popupdarkmode'] ) ? $options['popupdarkmode'] : 0;
+		$input['popupcentertext'] = isset( $options['popupcentertext'] ) ? $options['popupcentertext'] : 0;
+		$input['popupverticalcenter'] = isset( $options['popupverticalcenter'] ) ? $options['popupverticalcenter'] : 0;
+		$input['popuplarge'] = isset( $options['popuplarge'] ) ? $options['popuplarge'] : 0;
+		$input['popupbutton1style'] = isset( $options['popupbutton1style'] ) ? $options['popupbutton1style'] : 'default';
+		$input['popupbutton2style'] = isset( $options['popupbutton2style'] ) ? $options['popupbutton2style'] : 'primary';
+		$input['popupbuttonsize'] = isset( $options['popupbuttonsize'] ) ? $options['popupbuttonsize'] : 'large';
+		$input['popupbuttonalignment'] = isset( $options['popupbuttonalignment'] ) ? $options['popupbuttonalignment'] : 'left';
+
+		$input['popuphideloggedin'] = isset( $options['popuphideloggedin'] ) ? $options['popuphideloggedin'] : 0;
+		$input['popupshownotloggedin'] = isset( $options['popupshownotloggedin'] ) ? $options['popupshownotloggedin'] : 0;
+		$input['popuphidebutton2'] = isset( $options['popuphidebutton2'] ) ? $options['popuphidebutton2'] : 0;
+
+		$input['popupclosekeyboard'] = isset( $options['popupclosekeyboard'] ) ? $options['popupclosekeyboard'] : 0;
+		$input['popupclosebgclose'] = isset( $options['popupclosebgclose'] ) ? $options['popupclosebgclose'] : 0;
+		$input['popupdelay'] = isset( $options['popupdelay'] ) ? $options['popupdelay'] : 0;
+		$input['popupcookiedays'] = isset( $options['popupcookiedays'] ) ? $options['popupcookiedays'] : 1;
+	}
 
 	return $input;
 }

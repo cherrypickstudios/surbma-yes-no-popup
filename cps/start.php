@@ -1,7 +1,7 @@
 <?php
 
 // CPS SDK Version.
-$this_sdk_version = '4.0';
+$this_sdk_version = '5.0';
 
 define( 'CPS_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'CPS_URL', plugins_url( '', __FILE__ ) );
@@ -26,15 +26,12 @@ function cps_admin_scripts() {
 }
 
 function cps_admin_header( $plugin_file = '' ) {
-	// $plugin_file_path = plugin_dir_path( dirname( __FILE__ ) );
-	// $plugin_file_name = basename( plugin_dir_path( dirname( __FILE__ ) ) ) . '.php';
-	// $plugin_data = get_plugin_data( $plugin_file_path . $plugin_file_name );
 	if( $plugin_file != '' ) {
 		$plugin_data = get_plugin_data( $plugin_file );
 		$plugin_name = $plugin_data['Name'];
-		$headertitle = $plugin_name . ' | ' . __( 'Settings' );
+		$headertitle = $plugin_name . ' <span>by Cherry Pick Studios</span>';
 	} else {
-		$headertitle = __( 'Settings' );
+		$headertitle = 'Cherry Pick Studios <span>WordPress Plugins, That Just Works.</span>';
 	}
 	$headertitle = apply_filters( 'cps_admin_header_title', $headertitle );
 	$fburl = apply_filters( 'cps_admin_header_facebook_url', 'https://www.facebook.com/groups/CherryPickStudios/' );
@@ -48,7 +45,8 @@ function cps_admin_header( $plugin_file = '' ) {
 	?><nav class="uk-navbar-container uk-margin" id="cps-header" uk-navbar>
 		<div class="uk-navbar-left">
 			<div class="uk-navbar-item uk-logo">
-				<div><span uk-icon="icon: settings; ratio: 2"></span> <?php echo $headertitle ?></div>
+				<img src="<?php echo CPS_URL; ?>/images/cps-logo.svg" alt="Cherry Pick Studios">
+				<div><?php echo $headertitle ?></div>
 			</div>
 		</div>
 		<div class="uk-navbar-right">

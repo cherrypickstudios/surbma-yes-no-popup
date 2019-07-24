@@ -8,42 +8,113 @@
 
 #surbma-yes-no-popup {
 
+	section,
+	header,
+	footer {
+		display: block;
+	}
+
+	.uk-modal-header,
+	.uk-modal-content,
+	.uk-modal-footer {
+		overflow: hidden;
+	}
+
 	.uk-modal-header > :last-child,
 	.uk-modal-footer > :last-child {
 		margin-bottom: 0;
 		padding-bottom: 0;
 	}
 
-	// Popup Themes
-	&.surbma-yes-no-popup-normal .uk-modal-footer {
+	.uk-modal-content a {
+		border-bottom: 1px dashed #666;
+	}
+
+	&.surbma-yes-no-popup-dark .uk-modal-content a {
+		color: #fff;
+		border-bottom: 1px dashed #fff;
+	}
+
+	.uk-modal-content a:hover {
+		border-bottom: none;
+	}
+
+	.surbma-yes-no-popup-image-left {
+		text-align: left;
+	}
+
+	.surbma-yes-no-popup-image-center {
+		text-align: center;
+	}
+
+	.surbma-yes-no-popup-image-right {
 		text-align: right;
+	}
+
+	.surbma-yes-no-popup-image-float-left {
+		text-align: left;
+		float: left;
+		margin: 0;
+	}
+
+	.surbma-yes-no-popup-image-float-right {
+		text-align: right;
+		float: right;
+		margin: 0;
+	}
+
+	.uk-modal-footer.surbma-yes-no-popup-button-left {
+		text-align: left;
+	}
+
+	.uk-modal-footer.surbma-yes-no-popup-button-center {
+		text-align: center;
+	}
+
+	.uk-modal-footer.surbma-yes-no-popup-button-right {
+		text-align: right;
+	}
+
+	&.surbma-yes-no-popup-text-center .uk-modal-dialog {
+		text-align: center;
 	}
 
 	&.surbma-yes-no-popup-full-page {
 		background: #fff;
 	}
 
-	&.surbma-yes-no-popup-full-page-dark {
-		background: #000;
+	&.surbma-yes-no-popup-full-page.surbma-yes-no-popup-dark,
+	&.surbma-yes-no-popup-normal.surbma-yes-no-popup-dark .uk-modal-header,
+	&.surbma-yes-no-popup-normal.surbma-yes-no-popup-dark .uk-modal-dialog,
+	&.surbma-yes-no-popup-normal.surbma-yes-no-popup-dark .uk-modal-footer {
+		background: #111;
 	}
 
-	&.surbma-yes-no-popup-full-page .uk-modal-dialog,
-	&.surbma-yes-no-popup-full-page-dark .uk-modal-dialog {
-		box-shadow: none;
-	    text-align: center;
+	&.surbma-yes-no-popup-normal.surbma-yes-no-popup-dark:not(.surbma-yes-no-popup-default) .uk-modal-dialog {
+		background: #333;
 	}
 
 	&.surbma-yes-no-popup-full-page .uk-modal-header,
-	&.surbma-yes-no-popup-full-page-dark .uk-modal-header,
-	&.surbma-yes-no-popup-full-page .uk-modal-footer,
-	&.surbma-yes-no-popup-full-page-dark .uk-modal-footer {
+	&.surbma-yes-no-popup-full-page .uk-modal-dialog,
+	&.surbma-yes-no-popup-full-page .uk-modal-footer {
 		background: transparent;
+		box-shadow: none;
 		border: none;
 	}
 
-	&.surbma-yes-no-popup-full-page-dark .uk-modal-dialog {
-		background: #000;
+	&.surbma-yes-no-popup-dark .uk-modal-header h2,
+	&.surbma-yes-no-popup-dark .uk-modal-dialog {
 		color: #fff;
+	}
+
+	.uk-close {
+		text-decoration: none !important;
+	}
+
+	.uk-close:after {
+		content: "\00d7";
+		font-family: inherit;
+		font-size: 30px;
 	}
 
 	@media (max-width: @breakpoint-mini-max) {

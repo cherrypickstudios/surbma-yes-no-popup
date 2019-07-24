@@ -1,18 +1,13 @@
 <?php
 
-function cps_plugins_header_title( $title ) {
-	return __( 'Surbma & Cherry Pick Studios Plugins', 'cps-sdk' );
-}
-
 function cps_plugins_page() {
-	add_filter( 'cps_admin_header_title', 'cps_plugins_header_title' );
 ?>
-<div class="cps-admin cps-settings-page">
+<div class="cps-admin cps-plugins-page">
 	<?php cps_admin_header(); ?>
 	<div class="wrap">
-		<h2 class="uk-text-center uk--margin-bottom">Surbma & Cherry Pick Studios plugins</h2>
-		<p class="uk-text-center uk-margin-remove-top uk-margin-medium-bottom"><strong>If you like Surbma & Cherry Pick Studios plugins, take a look at our other plugins! <br>We are sure, you will find useful solutions for your website.</strong></p>
-		<div class="uk--grid-small uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-3@l" uk-grid uk-height-match="target: > div > div > .uk-card > .uk-card-body">
+		<h1 class="uk-text-center uk-margin-medium-top" style="font-size: 30px;"><strong>Check out other great plugins from Cherry Pick Studios!</strong></h1>
+		<p class="uk-text-center uk-margin-remove-top uk-margin-large-bottom">If you like Surbma & Cherry Pick Studios plugins, take a look at our other plugins! <br>We are sure, you will find useful solutions for your website.</p>
+		<div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-3@l" uk-grid="masonry: false;" uk-height-match="target: > div > .uk-card > .uk-card-body">
 		<?php
 			$json = file_get_contents( 'https://www.cherrypickstudios.com/cps-plugins.json' );
 			$plugins = json_decode( $json, true );
@@ -28,33 +23,30 @@ function cps_plugins_page() {
 
 				if( $title != '' ) { ?>
 				<div>
-					<div class="uk-card uk--card-small uk-card-default uk-card-hover">
-						<div class="uk-card-media-top">
+					<div class="uk-card uk-card-default uk-card-hover">
+						<div class="uk-card-media-top uk-hidden" style="overflow: hidden;max-height: 200px;">
 							<?php if( $img != false ) { ?>
 							<img src="<?php echo $img; ?>" alt="<?php echo $title; ?>">
 							<?php } else { ?>
-							<img src="<?php echo CPS_URL; ?>/images/cps-logo.svg" alt="" style="width: 220px;display: block;margin: 0 auto;padding: 60px;">
+							<img src="<?php echo CPS_URL; ?>/images/cps-logo.svg" alt="<?php echo $title; ?>" style="width: 200px;display: block;margin: 0 auto;padding: 50px;">
 							<?php } ?>
 						</div>
-						<div class="uk-card-header uk-background-muted">
-							<?php if( $badge != false ) { ?>
-							<div class="uk-card-badge uk-label"><?php echo $badge; ?></div>
-							<?php } ?>
-							<h3 class="uk-card-title" style="font-size: 18px;"><strong><?php echo $title; ?></strong></h3>
-						</div>
-						<?php if( $description != false ) { ?>
 						<div class="uk-card-body">
-							<?php echo $description; ?>
+							<?php if( $badge != false ) { ?>
+							<div class="uk-card-badge uk-label" style="padding: 5px 10px;top: -10px;"><?php echo $badge; ?></div>
+							<?php } ?>
+							<h3 class="uk-card-title"><strong><?php echo $title; ?></strong></h3>
+							<?php if( $description != false ) echo $description; ?>
 							<?php if( $alert != false ) { ?>
 							<div class="uk-alert-primary uk-margin-top" uk-alert>
 								<?php echo $alert; ?>
 							</div>
 							<?php } ?>
+							<a id="purchase" class="uk-button uk-button-primary uk-width-1-1 uk-hidden" href="<?php echo $url; ?>" target="_blank"><?php _e( $button, 'cps-sdk' ); ?></a>
 						</div>
-						<?php } ?>
 						<?php if( $url != false ) { ?>
 						<div class="uk-card-footer uk-background-muted">
-							<a id="purchase" class="uk-button uk-button-large uk-button-primary uk-width-1-1" href="<?php echo $url; ?>" target="_blank"><?php _e( $button, 'cps-sdk' ); ?></a>
+							<a id="purchase" class="uk-button uk-button-primary uk-width-1-1" href="<?php echo $url; ?>" target="_blank"><?php _e( $button, 'cps-sdk' ); ?></a>
 						</div>
 						<?php } ?>
 					</div>
@@ -63,8 +55,8 @@ function cps_plugins_page() {
 			}
 		?>
 		</div>
-		<div class="uk-margin-medium-bottom" id="bottom"></div>
-		<p class="uk-text-center">Surbma = Cherry Pick Studios = Surbma <br>Eventually all Surbma branded plugins will be renamed with our new brand: Cherry Pick Studios</p>
+		<div class="uk-margin-large-bottom" id="bottom"></div>
+		<p class="uk-text-center">Cherry Pick Studios is created by Surbma <br>Eventually all Surbma branded plugins will be renamed with our new brand: Cherry Pick Studios</p>
 	</div>
 	<?php cps_admin_footer(); ?>
 </div>
