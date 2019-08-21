@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: age verify, age verification, age, popup, cookie, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.9
 Tested up to: 5.2
-Stable tag: 5.0
+Stable tag: 5.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,7 +21,7 @@ This plugin can be an alternative for other Cookie Notice plugins to inform user
 
 ### Cache Proof Technology
 
-The CPS | Age Verification plugin is the first cookie notice solution, that is compatible with all kind of cache systems. It even works with all managed WordPress hostings' server side cache solutions.
+The CPS | Age Verification plugin is compatible with all kind of cache systems. It even works with all managed WordPress hostings' server side cache solutions.
 
 **IMPORTANT:** the popup is intentionally obtrusive and can not be closed, except clicking on the yes or no buttons. In the Premium version, you can enable the close function, but it is not recommended.
 
@@ -86,7 +86,7 @@ Set cookie expiration for visitors, so the popup won't show again in X days, you
 
 ### Developer informations
 
-#### De you want to contribute to the plugin development?
+#### Do you want to contribute to the plugin development?
 
 You can find the plugin source code on GitHub:
 
@@ -140,6 +140,18 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 5.1 =
+
+Release date: 2019-08-21
+
+This is a maintenance release with some small fixes. It is safe to update the plugin on a production website.
+
+FIXES
+
+- Force remove any margin or padding above the popup's header and footer elements.
+- Popup background CSS fix, if no background image is set.
+- Minor text modifications and typo fixes.
 
 = 5.0 =
 

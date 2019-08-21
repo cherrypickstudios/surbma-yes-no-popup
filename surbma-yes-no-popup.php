@@ -5,7 +5,7 @@ Plugin Name: CPS | Age Verification
 Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Shows a popup with age verification options.
 
-Version: 5.0
+Version: 5.1
 
 Author: CherryPickStudios
 Author URI: https://www.cherrypickstudios.com/
@@ -136,7 +136,7 @@ function surbma_yes_no_popup_block() {
 	$popupbuttonoptionsValue = isset( $options['popupbuttonoptions'] ) ? $options['popupbuttonoptions'] : 'button-1-redirect';
 
 	$popupimagealignmentValue = SURBMA_YES_NO_POPUP_PLUGIN_LICENSE == 'valid' && isset( $options['popupimagealignment'] ) ? $options['popupimagealignment'] : 'left';
-	$popupbackgroundimageValue = SURBMA_YES_NO_POPUP_PLUGIN_LICENSE == 'valid' && isset( $options['popupbackgroundimage'] ) ? $options['popupbackgroundimage'] : 'none';
+	$popupbackgroundimageValue = SURBMA_YES_NO_POPUP_PLUGIN_LICENSE == 'valid' && isset( $options['popupbackgroundimage'] ) ? $options['popupbackgroundimage'] : '';
 	$popupstylesValue = isset( $options['popupstyles'] ) ? $options['popupstyles'] : 'almost-flat';
 	$popupthemesValue = isset( $options['popupthemes'] ) && $options['popupthemes'] != '' ? $options['popupthemes'] : 'normal';
 	$popupdarkmodeValue = SURBMA_YES_NO_POPUP_PLUGIN_LICENSE == 'valid' && isset( $options['popupdarkmode'] ) && $options['popupdarkmode'] == 1 ? ' surbma-yes-no-popup-dark' : '';
