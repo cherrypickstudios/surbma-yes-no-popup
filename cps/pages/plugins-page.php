@@ -5,7 +5,7 @@ function cps_plugins_page() {
 <div class="cps-admin cps-plugins-page">
 	<?php cps_admin_header(); ?>
 	<div class="wrap">
-		<h1 class="uk-text-center uk-margin-medium-top" style="font-size: 30px;"><strong>Check out other great plugins from Cherry Pick Studios!</strong></h1>
+		<h2 class="uk-text-center uk-margin-medium-top" style="font-size: 30px;"><strong>Check out other great plugins from Cherry Pick Studios!</strong></h2>
 		<p class="uk-text-center uk-margin-remove-top uk-margin-large-bottom">If you like Surbma & Cherry Pick Studios plugins, take a look at our other plugins! <br>We are sure, you will find useful solutions for your website.</p>
 		<div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-3@l" uk-grid="masonry: false;" uk-height-match="target: > div > .uk-card > .uk-card-body">
 		<?php

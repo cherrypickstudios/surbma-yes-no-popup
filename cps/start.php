@@ -1,7 +1,7 @@
 <?php
 
 // CPS SDK Version.
-$this_sdk_version = '5.0';
+$this_sdk_version = '5.3';
 
 define( 'CPS_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'CPS_URL', plugins_url( '', __FILE__ ) );
@@ -12,17 +12,16 @@ add_action( 'admin_init', array( 'PAnD', 'init' ) );
 
 // Include files.
 if ( is_admin() ) {
-	include_once( dirname( __FILE__ ) . '/lib/admin.php' );
+	include_once dirname( __FILE__ ) . '/lib/admin.php';
 }
 
 // Custom styles and scripts for admin pages
 function cps_admin_scripts() {
-	$cps_admin_url = plugins_url( '', __FILE__ );
 	wp_enqueue_script( 'freemius-checkout-js', 'https://checkout.freemius.com/checkout.min.js', array( 'jquery' ), '2.3.0' );
-	wp_enqueue_script( 'uikit-js', $cps_admin_url . '/vendors/uikit/js/uikit.min.js', array( 'jquery' ), '3.1.6' );
-	wp_enqueue_script( 'uikit-icons', $cps_admin_url . '/vendors/uikit/js/uikit-icons.min.js', array( 'jquery' ), '3.1.6' );
-	wp_enqueue_style( 'uikit-css', $cps_admin_url . '/vendors/uikit/css/uikit.min.css', false, '3.1.6' );
-	wp_enqueue_style( 'cps-admin', $cps_admin_url . '/css/cps-admin.css' );
+	wp_enqueue_script( 'uikit-js', CPS_URL . '/vendors/uikit/js/uikit.min.js', array( 'jquery' ), '3.1.6' );
+	wp_enqueue_script( 'uikit-icons', CPS_URL . '/vendors/uikit/js/uikit-icons.min.js', array( 'jquery' ), '3.1.6' );
+	wp_enqueue_style( 'uikit-css', CPS_URL . '/vendors/uikit/css/uikit.min.css', false, '3.1.6' );
+	wp_enqueue_style( 'cps-admin', CPS_URL . '/assets/css/cps-admin.css' );
 }
 
 function cps_admin_header( $plugin_file = '' ) {
@@ -45,7 +44,7 @@ function cps_admin_header( $plugin_file = '' ) {
 	?><nav class="uk-navbar-container uk-margin" id="cps-header" uk-navbar>
 		<div class="uk-navbar-left">
 			<div class="uk-navbar-item uk-logo">
-				<img src="<?php echo CPS_URL; ?>/images/cps-logo.svg" alt="Cherry Pick Studios">
+				<img src="<?php echo CPS_URL; ?>/assets/images/cps-logo.svg" alt="Cherry Pick Studios">
 				<div><?php echo $headertitle ?></div>
 			</div>
 		</div>
@@ -59,7 +58,8 @@ function cps_admin_header( $plugin_file = '' ) {
 			</ul>
 			<div class="uk-navbar-item"></div>
 		</div>
-	</nav><?php
+	</nav>
+	<div id="cps-admin-notification-placeholder" class="wrap"><h1></h1></div><?php
 }
 
 function cps_admin_footer( $plugin_file = '' ) {

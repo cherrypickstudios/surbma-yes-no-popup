@@ -1,10 +1,10 @@
 === CPS | Age Verification ===
-Contributors: Surbma, CherryPickStudios
+Contributors: CherryPickStudios, Surbma
 Donate link: https://surbma.com/donate/
 Tags: age verify, age verification, age, popup, cookie, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 4.9
 Tested up to: 5.2
-Stable tag: 5.1
+Stable tag: 5.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -140,6 +140,16 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 5.2 =
+
+Release date: 2019-08-23
+
+It is a minor release with a new CPS SDK under the hood. It is safe to update the plugin on a production website.
+
+OTHER
+
+- CPS SDK updated to 5.3 version.
 
 = 5.1 =
 

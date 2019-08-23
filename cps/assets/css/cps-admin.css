@@ -2,6 +2,13 @@ body {
 	height: auto;
 }
 
+#cps-admin-notification-placeholder.wrap,
+#cps-admin-notification-placeholder.wrap h1 {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 0;
+}
+
 .notice + .cps-admin {
 	margin-top: 10px;
 }
@@ -12,8 +19,6 @@ body {
 }
 
 .cps-admin #cps-header {
-	/*background: url("../images/background-texture.jpg"), linear-gradient(to right, #1e87f0, #28a5f5) !important;*/
-	/*background-blend-mode: overlay;*/
 	background: #fff;
 	margin: 0 0 20px -20px;
 	padding: 10px;
@@ -56,18 +61,6 @@ body {
 .cps-admin .uk-navbar-container .uk-navbar-nav > li > a:hover {
 	color: #06c;
 }
-
-/*
-@media (min-width: 960px) {
-	.cps-admin .uk-form-horizontal .uk-form-label {
-		width: 400px;
-	}
-
-	.cps-admin .uk-form-horizontal .uk-form-controls {
-		margin-left: 415px;
-	}
-}
-*/
 
 .cps-admin input[type=text].uk-input,
 .cps-admin input[type=search].uk-input,
