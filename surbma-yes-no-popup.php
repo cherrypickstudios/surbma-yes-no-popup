@@ -5,7 +5,7 @@ Plugin Name: CPS | Age Verification
 Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Shows a popup with age verification options.
 
-Version: 5.2
+Version: 6.0
 
 Author: CherryPickStudios
 Author URI: https://www.cherrypickstudios.com/

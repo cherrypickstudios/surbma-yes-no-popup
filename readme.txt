@@ -2,9 +2,9 @@
 Contributors: CherryPickStudios, Surbma
 Donate link: https://surbma.com/donate/
 Tags: age verify, age verification, age, popup, cookie, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
-Requires at least: 4.9
-Tested up to: 5.2
-Stable tag: 5.2
+Requires at least: 5.1
+Tested up to: 5.3
+Stable tag: 6.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -34,7 +34,7 @@ The CPS | Age Verification plugin is compatible with all kind of cache systems. 
 
 ### Additional features in the Pro version
 
-- Header Image Field
+- Header Image Field / Logo
 - Set Background Image
 - Popup Styles
 - Popup Themes
@@ -60,9 +60,11 @@ If you enable debug mode, popup will show always, on every refresh, so you can t
 #### WPML & Polylang Compatible
 If you have a multilingual website, you can set the texts for each language with WPML String Translation add-on.
 
-#### Header Image Field
+#### Header Image Field / Logo
+You can upload an image or logo, that will display above the title. It can be an icon also. Make your popup to fit your website and brand.
 
 #### Set Background Image
+Custom background image for the popup. It will cover the entire screen with your beautiful background. One of the best design feature to wow your visitors.
 
 #### Popup Styles
 There are popup styles to choose the look and feel of the popup: Default, Almost Flat and Gradient. Fit the style to your website easily.
@@ -71,15 +73,19 @@ There are popup styles to choose the look and feel of the popup: Default, Almost
 There are popup themes to choose the design, you like. The Full Page Themes are hiding the entire content behind the popup. There are a lot of design settings to make the popup fit your website design. Dark mode is also available.
 
 #### Button Styles
+Choose from one of the pre-defined button styles to fit your message and design. You can set custom style for your "yes" and for your "no" button individually.
 
 #### Dark mode
+Welcome to the dark side! If you prefer dark design, this feature is for you. Choose this option also, when you have a dark background image.
 
 #### Membership Mode
 You can disable popup for logged in users, so your members will not see any popups at all. You can always show the popup to all visitors, who are not logged in, even if they clicked on the Yes button. There is a "One button mode" also, that will hide the second button, so you can show only one option to your visitors. This option is best paired with the "always show to all visitors, who are not logged in" option, so you can keep your content safe.
 
 #### Close Popup
+Yes, I know, the point of an age verification popup is, that it can not be closed without the consent. But some of you missed this feature, so it is built in. Don't use, if you don't need it!
 
 #### Popup Delay
+Set your preferred time to delay the popup after the page is loaded. Maybe you want your visitors to have a few seconds to see the webpage and only then ask them to consent your conditions.
 
 #### Cookie Control
 Set cookie expiration for visitors, so the popup won't show again in X days, you set.
@@ -140,6 +146,19 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 6.0 =
+
+Release date: 2019-08-23
+
+Minor, but important changes under the hood. Sorry, no new features now. It is safe to update the plugin.
+
+OTHER
+
+- Added missing descriptions.
+- Tested with WordPress 5.3 version.
+- Updated to use a new way to deploy it to wp.org repo.
+- PRO - Freemius SDK updated to 2.3.2 version.
 
 = 5.2 =
 
