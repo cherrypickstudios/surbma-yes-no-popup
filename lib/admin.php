@@ -82,7 +82,6 @@ function surbma_yes_no_popup_admin_sidebar() {
 			name: 				'CPS | Age Verification',
 			subtitle: 			'CPS | Age Verification Premium',
 			licenses: 			1,
-			hide_coupon: 		true,
 			purchaseCompleted: 	function(response){},
 			success: 			function(response){}
 		});

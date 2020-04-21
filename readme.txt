@@ -3,8 +3,8 @@ Contributors: CherryPickStudios, Surbma
 Donate link: https://surbma.com/donate/
 Tags: age verify, age verification, age, popup, cookie, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
 Requires at least: 5.1
-Tested up to: 5.3
-Stable tag: 6.1
+Tested up to: 5.4
+Stable tag: 6.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -146,6 +146,14 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 6.2 =
+
+Release date: 2020-04-21
+
+OTHER
+
+- Let Freemius show coupon field.
 
 = 6.1 =
 
