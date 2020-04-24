@@ -484,7 +484,7 @@ function surbma_yes_no_popup_settings_page() {
 									<?php $popupexcepthereValue = isset( $options['popupexcepthere'] ) ? $options['popupexcepthere'] : NULL; ?>
 									<input id="popupexcepthere" class="uk-input uk-form-width-small" type="number" name="surbma_yes_no_popup_fields[popupexcepthere]" value="<?php esc_attr_e( $popupexcepthereValue ); ?>" placeholder="ID" /> (<?php _e( 'You can give only ONE PAGE ID!', 'surbma-yes-no-popup' ); ?>)</p>
 									<p class="uk-text-meta"><?php _e( 'If this option is enabled, all other options below will be ignored!', 'surbma-yes-no-popup' ); ?></p>
-									<hr>
+									<h4 class="uk-heading-divider"><?php _e( 'Special Pages', 'surbma-yes-no-popup' ); ?></h4>
 									<p class="switch-wrap">
 										<?php _e( 'Frontpage', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
@@ -509,6 +509,7 @@ function surbma_yes_no_popup_settings_page() {
 											<span class="slider round"></span>
 										</label>
 									</p>
+									<h4 class="uk-heading-divider"><?php _e( 'Single Pages', 'surbma-yes-no-popup' ); ?></h4>
 									<?php
 									foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $post_type ) {
 										$popupshowcpt = 'popupshowcpt-' . $post_type->name;
@@ -524,6 +525,59 @@ function surbma_yes_no_popup_settings_page() {
 										<?php
 									}
 									?>
+									<?php if( class_exists( 'WooCommerce' ) ) { ?>
+									<div class="<?php echo $disabled; ?>">
+									<h4 class="uk-heading-divider"><?php _e( 'WooCommerce Pages', 'surbma-yes-no-popup' ); ?></h4>
+									<p class="switch-wrap">
+										<?php _e( 'Shop page', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupshowwcshopValue = isset( $options['popupshowwcshop'] ) ? $options['popupshowwcshop'] : 0; ?>
+											<input id="popupshowwcshop" name="surbma_yes_no_popup_fields[popupshowwcshop]" type="checkbox" value="1" <?php checked( '1', $popupshowwcshopValue ); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									<p class="switch-wrap">
+										<?php _e( 'Cart page', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupshowwccartValue = isset( $options['popupshowwccart'] ) ? $options['popupshowwccart'] : 0; ?>
+											<input id="popupshowwccart" name="surbma_yes_no_popup_fields[popupshowwccart]" type="checkbox" value="1" <?php checked( '1', $popupshowwccartValue ); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									<p class="switch-wrap">
+										<?php _e( 'Checkout page', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupshowwccheckoutValue = isset( $options['popupshowwccheckout'] ) ? $options['popupshowwccheckout'] : 0; ?>
+											<input id="popupshowwccheckout" name="surbma_yes_no_popup_fields[popupshowwccheckout]" type="checkbox" value="1" <?php checked( '1', $popupshowwccheckoutValue ); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									<p class="switch-wrap">
+										<?php _e( 'Customer account page', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupshowwcaccountValue = isset( $options['popupshowwcaccount'] ) ? $options['popupshowwcaccount'] : 0; ?>
+											<input id="popupshowwcaccount" name="surbma_yes_no_popup_fields[popupshowwcaccount]" type="checkbox" value="1" <?php checked( '1', $popupshowwcaccountValue ); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									<p class="switch-wrap">
+										<?php _e( 'Product category pages', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupshowwcproductcategoryValue = isset( $options['popupshowwcproductcategory'] ) ? $options['popupshowwcproductcategory'] : 0; ?>
+											<input id="popupshowwcproductcategory" name="surbma_yes_no_popup_fields[popupshowwcproductcategory]" type="checkbox" value="1" <?php checked( '1', $popupshowwcproductcategoryValue ); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									<p class="switch-wrap">
+										<?php _e( 'Product tag pages', 'surbma-yes-no-popup' ); ?>:
+										<label class="switch">
+											<?php $popupshowwcproducttagValue = isset( $options['popupshowwcproducttag'] ) ? $options['popupshowwcproducttag'] : 0; ?>
+											<input id="popupshowwcproducttag" name="surbma_yes_no_popup_fields[popupshowwcproducttag]" type="checkbox" value="1" <?php checked( '1', $popupshowwcproducttagValue ); ?><?php echo $disabled; ?> />
+											<span class="slider round"></span>
+										</label>
+									</p>
+									</div>
+									<?php } ?>
 								</div>
 							</div>
 							<div class="uk-margin">
@@ -606,7 +660,7 @@ function surbma_yes_no_popup_settings_page() {
 							<div class="uk-margin<?php echo $disabled; ?>">
 								<div class="uk-form-label"><?php _e( 'Close options', 'surbma-yes-no-popup' ); ?></div>
 								<div class="uk-form-controls">
-									<p class="switch-wrap<?php echo $disabled; ?>">
+									<p class="switch-wrap">
 										<?php _e( 'Close button in popup', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
 											<?php $popupclosebuttonValue = isset( $options['popupclosebutton'] ) ? $options['popupclosebutton'] : 0; ?>
@@ -614,7 +668,7 @@ function surbma_yes_no_popup_settings_page() {
 											<span class="slider round"></span>
 										</label>
 									</p>
-									<p class="switch-wrap<?php echo $disabled; ?>">
+									<p class="switch-wrap">
 										<?php _e( 'Close with keyboard (ESC button)', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
 											<?php $popupclosekeyboardValue = isset( $options['popupclosekeyboard'] ) ? $options['popupclosekeyboard'] : 0; ?>
@@ -622,7 +676,7 @@ function surbma_yes_no_popup_settings_page() {
 											<span class="slider round"></span>
 										</label>
 									</p>
-									<p class="switch-wrap<?php echo $disabled; ?>">
+									<p class="switch-wrap">
 										<?php _e( 'Close with a click on the background', 'surbma-yes-no-popup' ); ?>:
 										<label class="switch">
 											<?php $popupclosebgcloseValue = isset( $options['popupclosebgclose'] ) ? $options['popupclosebgclose'] : 0; ?>
@@ -752,6 +806,12 @@ function surbma_yes_no_popup_fields_validate( $input ) {
 	$input['popupshowfrontpage'] = isset( $input['popupshowfrontpage'] ) && $input['popupshowfrontpage'] == 1 ? 1 : 0;
 	$input['popupshowblog'] = isset( $input['popupshowblog'] ) && $input['popupshowblog'] == 1 ? 1 : 0;
 	$input['popupshowarchive'] = isset( $input['popupshowarchive'] ) && $input['popupshowarchive'] == 1 ? 1 : 0;
+	$input['popupshowwcshop'] = isset( $input['popupshowwcshop'] ) && $input['popupshowwcshop'] == 1 ? 1 : 0;
+	$input['popupshowwccart'] = isset( $input['popupshowwccart'] ) && $input['popupshowwccart'] == 1 ? 1 : 0;
+	$input['popupshowwccheckout'] = isset( $input['popupshowwccheckout'] ) && $input['popupshowwccheckout'] == 1 ? 1 : 0;
+	$input['popupshowwcaccount'] = isset( $input['popupshowwcaccount'] ) && $input['popupshowwcaccount'] == 1 ? 1 : 0;
+	$input['popupshowwcproductcategory'] = isset( $input['popupshowwcproductcategory'] ) && $input['popupshowwcproductcategory'] == 1 ? 1 : 0;
+	$input['popupshowwcproducttag'] = isset( $input['popupshowwcproducttag'] ) && $input['popupshowwcproducttag'] == 1 ? 1 : 0;
 	$input['popupclosebutton'] = isset( $input['popupclosebutton'] ) && $input['popupclosebutton'] == 1 ? 1 : 0;
 	$input['popupclosekeyboard'] = isset( $input['popupclosekeyboard'] ) && $input['popupclosekeyboard'] == 1 ? 1 : 0;
 	$input['popupclosebgclose'] = isset( $input['popupclosebgclose'] ) && $input['popupclosebgclose'] == 1 ? 1 : 0;

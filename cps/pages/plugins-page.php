@@ -5,11 +5,13 @@ function cps_plugins_page() {
 <div class="cps-admin cps-plugins-page">
 	<?php cps_admin_header(); ?>
 	<div class="wrap">
-		<h2 class="uk-text-center uk-margin-medium-top" style="font-size: 30px;"><strong>Check out other great plugins from Cherry Pick Studios!</strong></h2>
-		<p class="uk-text-center uk-margin-remove-top uk-margin-large-bottom">If you like Surbma & Cherry Pick Studios plugins, take a look at our other plugins! <br>We are sure, you will find useful solutions for your website.</p>
+		<h2 class="uk-text-center uk-margin-medium-top" style="font-size: 30px;"><strong>Check out other great plugins from CherryPick Studios & Surbma!</strong></h2>
+		<p class="uk-text-center uk-margin-remove-top uk-margin-large-bottom">If you like CherryPick Studios & Surbma plugins, take a look at our other plugins! <br>We are sure, you will find useful solutions for your website.</p>
 		<div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-3@l" uk-grid="masonry: false;" uk-height-match="target: > div > .uk-card > .uk-card-body">
 		<?php
-			$json = file_get_contents( 'https://www.cherrypickstudios.com/cps-plugins.json' );
+			$response = wp_remote_get( 'https://www.cherrypickstudios.com/cps-plugins.json' );
+			if( is_wp_error( $response ) ) return false;
+			$json = wp_remote_retrieve_body( $response );
 			$plugins = json_decode( $json, true );
 
 			foreach ( $plugins as $plugin ) {
@@ -56,7 +58,7 @@ function cps_plugins_page() {
 		?>
 		</div>
 		<div class="uk-margin-large-bottom" id="bottom"></div>
-		<p class="uk-text-center">Cherry Pick Studios is created by Surbma <br>Eventually all Surbma branded plugins will be renamed with our new brand: Cherry Pick Studios</p>
+		<p class="uk-text-center">CherryPick Studios is created by Surbma <br>Eventually all Surbma branded plugins will be renamed with our new brand: CherryPick Studios</p>
 	</div>
 	<?php cps_admin_footer(); ?>
 </div>

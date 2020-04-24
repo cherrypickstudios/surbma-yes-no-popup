@@ -9,7 +9,7 @@ function cps_add_menus() {
 	$cps_plugins_page = add_menu_page(
 		__( 'CPS Plugins', 'cps-sdk' ),
 		__( 'CPS Plugins', 'cps-sdk' ),
-		'read',
+		'manage_options',
 		'cps-plugins-menu',
 		'cps_plugins_page',
 		CPS_URL . '/assets/images/cps-logo.svg',
@@ -19,7 +19,7 @@ function cps_add_menus() {
 		'cps-plugins-menu',
 		__( 'All plugins', 'cps-sdk' ),
 		__( 'All plugins', 'cps-sdk' ),
-		'read',
+		'manage_options',
 		'cps-plugins-menu',
 		'cps_plugins_page'
 	);

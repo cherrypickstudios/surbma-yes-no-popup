@@ -71,6 +71,7 @@ function surbma_yes_no_popup_admin_sidebar() {
 		</div>
 	</div>
 </div>
+<script src="https://checkout.freemius.com/checkout.min.js"></script>
 <script>
 	var handler = FS.Checkout.configure({
 		plugin_id:  '4072',
@@ -111,7 +112,7 @@ function surbma_yes_no_popup_admin_notice__welcome() {
 	?>
 	<div data-dismissible="surbma_yes_no_popup-notice-welcome-forever" class="notice notice-info is-dismissible">
 		<div style="padding: 20px;">
-			<img src="<?php echo SURBMA_YES_NO_POPUP_PLUGIN_URL; ?>/cps/images/cps-logo.svg" alt="Cherry Pick Studios" style="width: 50px;">
+			<img src="<?php echo SURBMA_YES_NO_POPUP_PLUGIN_URL; ?>/cps/assets/images/cps-logo.svg" alt="Cherry Pick Studios" style="width: 50px;">
 			<p><strong><?php _e( 'Thank you for choosing CPS | Age Verification plugin!', 'surbma-yes-no-popup' ); ?></strong></p>
 			<p><?php printf( esc_html__( 'The first step is to go to the %1$splugin\'s settings page%2$s, where you can set up your Age Verification popup!', 'surbma-yes-no-popup' ), $linkStart, $linkEnd ); ?></p>
 			<p><?php _e( '<strong>IMPORTANT!</strong> This notification will never show up again after you close it.', 'surbma-yes-no-popup' ); ?></p>

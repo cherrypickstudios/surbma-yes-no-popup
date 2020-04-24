@@ -1,10 +1,10 @@
 === CPS | Age Verification ===
 Contributors: CherryPickStudios, Surbma
 Donate link: https://surbma.com/donate/
-Tags: age verify, age verification, age, popup, cookie, privacy, privacy directive, yes, no, yes/no, adult, confirmation, restrict
+Tags: age verify, age verification, woocommerce, popup, yes/no, adult, confirmation, restrict
 Requires at least: 5.1
 Tested up to: 5.4
-Stable tag: 6.2
+Stable tag: 7.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,6 +12,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Shows a popup with age verification options. One of the best plugin for any membership or 18+ adult sites or any sites, that requires confirmation from a visitor.
 
 == Description ==
+
+>NEW WooCommerce Settings Arrived for Premium version!
 
 This plugin is showing a Popup for visitors to verify their ages on your page. YES button will close the Popup and visitors can continue reading your content. NO button will redirect visitors to another URL, set by you to inform them about your policy.
 
@@ -32,7 +34,7 @@ The CPS | Age Verification plugin is compatible with all kind of cache systems. 
 - Developer Friendly
 - WPML & Polylang Compatible
 
-### Additional features in the Pro version
+### Additional features in the Premium version
 
 - Header Image Field / Logo
 - Set Background Image
@@ -45,6 +47,7 @@ The CPS | Age Verification plugin is compatible with all kind of cache systems. 
 - Close Popup
 - Popup Delay
 - Cookie Control
+- WooCommerce Settings
 
 ### Features in details
 
@@ -89,6 +92,9 @@ Set your preferred time to delay the popup after the page is loaded. Maybe you w
 
 #### Cookie Control
 Set cookie expiration for visitors, so the popup won't show again in X days, you set.
+
+#### WooCommerce Settings
+Set the popup to show it on WooCommerce pages, like Shop, Cart, Checkout, Account pages or Product category and tag archive pages.
 
 ### Developer informations
 
@@ -147,6 +153,23 @@ It is the reverse version of my last name. ;)
 
 == Changelog ==
 
+= 7.0 =
+
+Release date: 2020-04-24
+
+NEW
+
+- PREMIUM - New settings for WooCommerce pages: Shop, Cart, Checkout, Account and Product archives.
+
+FIXES
+
+- Minor CSS fix for popup.
+
+OTHER
+
+- CPS SDK updated to 5.10 version.
+- Modifications in description.
+
 = 6.2 =
 
 Release date: 2020-04-21
@@ -166,7 +189,7 @@ OTHER
 - Added missing descriptions.
 - Tested with WordPress 5.3 version.
 - Updated to use a new way to deploy it to wp.org repo.
-- PRO - Freemius SDK updated to 2.3.2 version.
+- PREMIUM - Freemius SDK updated to 2.3.2 version.
 
 = 5.2 =
 
@@ -201,11 +224,11 @@ IMPORTANT! A lot of new codes are added and modified. The logic of the design is
 NEW
 
 - New premium options added to the admin.
-- PRO - Add Image to the header.
-- PRO - Add background image to the popup.
-- PRO - A lot of cool design features added, like Dark mode, Vertical centering, Large modifier, etc.
-- PRO - You can enable closing the popup with a button, ESC or clicking on the background.
-- PRO - Give delay to the popup.
+- PREMIUM - Add Image to the header.
+- PREMIUM - Add background image to the popup.
+- PREMIUM - A lot of cool design features added, like Dark mode, Vertical centering, Large modifier, etc.
+- PREMIUM - You can enable closing the popup with a button, ESC or clicking on the background.
+- PREMIUM - Give delay to the popup.
 
 ENHANCEMENTS
 

@@ -5,7 +5,7 @@ Plugin Name: CPS | Age Verification
 Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Shows a popup with age verification options.
 
-Version: 6.2
+Version: 7.0
 
 Author: CherryPickStudios
 Author URI: https://www.cherrypickstudios.com/
@@ -99,8 +99,14 @@ function surbma_yes_no_popup_show() {
 		if( isset( $options['popupshowblog'] ) && $options['popupshowblog'] == 1 && is_home() ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 		}
-		if( isset( $options['popupshowarchive'] ) && $options['popupshowarchive'] == 1 && is_archive() ) {
-			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		if( class_exists( 'WooCommerce' ) ) {
+			if( isset( $options['popupshowarchive'] ) && $options['popupshowarchive'] == 1 && is_archive() && ( !is_shop() && !is_product_category() && !is_product_tag() ) ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
+		} else {
+			if( isset( $options['popupshowarchive'] ) && $options['popupshowarchive'] == 1 && is_archive() ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
 		}
 		foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $post_type ) {
 			$popupshowcpt = 'popupshowcpt-' . $post_type->name;
@@ -119,6 +125,26 @@ function surbma_yes_no_popup_show() {
 		$includecategories = isset( $options['popupshowcategories'] ) ? explode( ',', $options['popupshowcategories'] ) : '';
 		if( $includecategories != '' && $options['popupshowarchive'] != 1 && ( is_category( $includecategories ) || in_category( $includecategories ) ) ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+		if( SURBMA_YES_NO_POPUP_PLUGIN_LICENSE == 'valid' && class_exists( 'WooCommerce' ) ) {
+			if( isset( $options['popupshowwcshop'] ) && $options['popupshowwcshop'] == 1 && is_shop() ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
+			if( isset( $options['popupshowwccart'] ) && $options['popupshowwccart'] == 1 && is_cart() ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
+			if( isset( $options['popupshowwccheckout'] ) && $options['popupshowwccheckout'] == 1 && is_checkout() ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
+			if( isset( $options['popupshowwcaccount'] ) && $options['popupshowwcaccount'] == 1 && is_account_page() ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
+			if( isset( $options['popupshowwcproductcategory'] ) && $options['popupshowwcproductcategory'] == 1 && is_product_category() ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
+			if( isset( $options['popupshowwcproducttag'] ) && $options['popupshowwcproducttag'] == 1 && is_product_tag() ) {
+				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+			}
 		}
 	}
 }
