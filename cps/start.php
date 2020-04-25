@@ -1,7 +1,7 @@
 <?php
 
 // CPS SDK Version.
-$this_sdk_version = '5.10';
+define( 'CPS_SDK_VERSION', '6.0' );
 
 define( 'CPS_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'CPS_URL', plugins_url( '', __FILE__ ) );
@@ -15,12 +15,18 @@ if ( is_admin() ) {
 	include_once dirname( __FILE__ ) . '/lib/admin.php';
 }
 
+// Fix to load inline scripts after jQuery.
+add_action( 'wp_enqueue_scripts', function() {
+	wp_register_script( 'cps-jquery-fix', false, array( 'jquery' ), CPS_SDK_VERSION, true );
+	wp_enqueue_script( 'cps-jquery-fix' );
+} );
+
 // Custom styles and scripts for admin pages
 function cps_admin_scripts() {
-	wp_enqueue_script( 'uikit-js', CPS_URL . '/vendors/uikit/js/uikit.min.js', array( 'jquery' ), '3.1.6' );
-	wp_enqueue_script( 'uikit-icons', CPS_URL . '/vendors/uikit/js/uikit-icons.min.js', array( 'jquery' ), '3.1.6' );
-	wp_enqueue_style( 'uikit-css', CPS_URL . '/vendors/uikit/css/uikit.min.css', false, '3.1.6' );
-	wp_enqueue_style( 'cps-admin', CPS_URL . '/assets/css/cps-admin.css' );
+	wp_enqueue_script( 'uikit-js', CPS_URL . '/vendors/uikit/js/uikit.min.js', array( 'jquery' ), '3.4.2' );
+	wp_enqueue_script( 'uikit-icons', CPS_URL . '/vendors/uikit/js/uikit-icons.min.js', array( 'jquery' ), '3.4.2' );
+	wp_enqueue_style( 'uikit-css', CPS_URL . '/vendors/uikit/css/uikit.min.css', false, '3.4.2' );
+	wp_enqueue_style( 'cps-admin', CPS_URL . '/assets/css/cps-admin.css', false, CPS_SDK_VERSION );
 }
 
 function cps_admin_header( $plugin_file = '' ) {
