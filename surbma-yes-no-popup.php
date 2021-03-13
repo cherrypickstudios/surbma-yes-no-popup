@@ -5,7 +5,7 @@ Plugin Name: CPS | Age Verification
 Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Shows a popup with age verification options.
 
-Version: 7.2
+Version: 7.3
 
 Author: CherryPickStudios
 Author URI: https://www.cherrypickstudios.com/
@@ -188,6 +188,7 @@ function surbma_yes_no_popup_block() {
 	?>
 <input type="hidden" id="popuphideloggedin" value="<?php echo $popuphideloggedinValue; ?>" />
 <input type="hidden" id="popupshownotloggedin" value="<?php echo $popupshownotloggedinValue; ?>" />
+<input type="hidden" id="popupbuttonurl" value="<?php echo $popupbuttonurlValue; ?>" />
 <input type="hidden" id="popupdebug" value="<?php echo $popupdebugValue; ?>" />
 <script type="text/javascript">
 	function surbma_ynp_openModal() {
@@ -195,19 +196,39 @@ function surbma_yes_no_popup_block() {
 	}
 	jQuery(document).ready(function($) {
 		var show_modal = 0;
-		if( $('#popupdebug').val() == '1' || $('#popupshownotloggedin').val() == '1' ) {
+		var page_URL = $(location).attr("href");
+		var popup_button_URL = $('#popupbuttonurl').val();
+
+		// Always show Popup for NOT logged in users
+		if ( $('#popupshownotloggedin').val() == '1' ) {
 			show_modal = 1;
-		} else {
-			if( surbma_ynp_readCookie('surbma-yes-no-popup') != 'yes' && $('#popuphideloggedin').val() != '1' ) {
-				show_modal = 1;
-			}
+		// Check cookie
+		} else if ( surbma_ynp_readCookie('surbma-yes-no-popup') != 'yes' ) {
+			show_modal = 1;
 		}
+
+		// Hide popup if logged in
+		if ( $('#popuphideloggedin').val() == '1' ) {
+			show_modal = 0;
+		// Hide popup on the redirected page
+		} else if ( page_URL == popup_button_URL ) {
+			show_modal = 0;
+		}
+
+		// Debug mode!!!
+		if ( $('#popupdebug').val() == '1' ) {
+			show_modal = 1;
+		}
+
 		if( show_modal == 1 ) {
 			setTimeout(function() {
 				surbma_ynp_openModal();
 			}, <?php echo $popupdelayValue; ?>);
 		}
-		// console.log('show_modal'+show_modal);
+
+		// console.log('page_URL: '+page_URL);
+		// console.log('popup_button_URL: '+popup_button_URL);
+		// console.log('show_modal: '+show_modal);
 	});
 </script>
 <div id="surbma-yes-no-popup" class="uk-modal surbma-yes-no-popup-<?php echo $popupthemesValue; ?><?php echo $popupdarkmodeValue; ?><?php echo $popupcentertextValue; ?> surbma-yes-no-popup-<?php echo $popupstylesValue; ?>" style="background-image: url(<?php echo esc_attr_e( $popupbackgroundimageValue ); ?>);background-size: cover;background-repeat: no-repeat;">

@@ -3,9 +3,9 @@ Contributors: CherryPickStudios, Surbma
 Donate link: https://surbma.com/donate/
 Tags: age verify, age verification, woocommerce, popup, yes/no, adult, confirmation, restrict
 Requires at least: 5.2
-Tested up to: 5.5
-Stable tag: 7.2
-Requires PHP: 5.6
+Tested up to: 5.7
+Stable tag: 7.3
+Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -152,6 +152,25 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 7.3 =
+
+Release date: 2021-03-13
+
+FIXES
+
+- Fixes some PHP warnings.
+- Popup display conditions are refactored.
+- Fixed checking, when visitor is on the redirected page.
+
+OTHER
+
+- Tested with WordPress 5.7 version.
+- Changed minimum PHP requirement.
+
+PREMIUM
+
+- Freemius SDK updated to 2.4.2 version.
 
 = 7.2 =
 

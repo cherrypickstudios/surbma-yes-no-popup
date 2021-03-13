@@ -194,32 +194,37 @@ function surbma_yes_no_popup_settings_page() {
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popuptitle]"><?php _e( 'Popup Title', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popuptitle" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popuptitle]" value="<?php esc_attr_e( $options['popuptitle'] ); ?>" />
+									<?php $popuptitleValue = isset( $options['popuptitle'] ) ? $options['popuptitle'] : ''; ?>
+									<input id="popuptitle" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popuptitle]" value="<?php echo esc_attr( wp_unslash( $popuptitleValue ) ); ?>" />
 								</div>
 							</div>
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popuptext]"><?php _e( 'Popup Text', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<textarea id="popuptext" class="uk-textarea" cols="50" rows="10" name="surbma_yes_no_popup_fields[popuptext]"><?php echo stripslashes( $options['popuptext'] ); ?></textarea>
-									<p><?php _e( 'Allowed HTML tags in this field', 'surbma-yes-no-popup' ); ?>:<br /><pre><?php echo allowed_tags(); ?></pre></p>
+									<?php $popuptextValue = isset( $options['popuptext'] ) ? $options['popuptext'] : ''; ?>
+									<textarea id="popuptext" class="uk-textarea" cols="50" rows="10" name="surbma_yes_no_popup_fields[popuptext]"><?php echo esc_html( wp_unslash( $popuptextValue ) ); ?></textarea>
+									<p><?php _e( 'Allowed HTML tags in this field', 'surbma-yes-no-popup' ); ?>:<br><pre><?php echo allowed_tags(); ?></pre></p>
 								</div>
 							</div>
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbutton1text]"><?php _e( 'Popup Button 1 Text', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupbutton1text" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbutton1text]" value="<?php echo stripslashes( $options['popupbutton1text'] ); ?>" />
+									<?php $popupbutton1textValue = isset( $options['popupbutton1text'] ) ? $options['popupbutton1text'] : ''; ?>
+									<input id="popupbutton1text" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbutton1text]" value="<?php echo esc_attr( wp_unslash( $popupbutton1textValue ) ); ?>" />
 								</div>
 							</div>
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbutton2text]"><?php _e( 'Popup Button 2 Text', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupbutton2text" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbutton2text]" value="<?php echo stripslashes( $options['popupbutton2text'] ); ?>" />
+									<?php $popupbutton2textValue = isset( $options['popupbutton2text'] ) ? $options['popupbutton2text'] : ''; ?>
+									<input id="popupbutton2text" class="uk-input" type="text" name="surbma_yes_no_popup_fields[popupbutton2text]" value="<?php echo esc_attr( wp_unslash( $popupbutton2textValue ) ); ?>" />
 								</div>
 							</div>
 							<div class="uk-margin">
 								<label class="uk-form-label" for="surbma_yes_no_popup_fields[popupbuttonurl]"><?php _e( 'Popup Button Redirect URL', 'surbma-yes-no-popup' ); ?></label>
 								<div class="uk-form-controls">
-									<input id="popupbuttonurl" class="uk-input" type="url" name="surbma_yes_no_popup_fields[popupbuttonurl]" value="<?php esc_attr_e( $options['popupbuttonurl'] ); ?>" />
+									<?php $popupbuttonurlValue = isset( $options['popupbuttonurl'] ) ? $options['popupbuttonurl'] : ''; ?>
+									<input id="popupbuttonurl" class="uk-input" type="url" name="surbma_yes_no_popup_fields[popupbuttonurl]" value="<?php echo esc_attr( wp_unslash( $popupbuttonurlValue ) ); ?>" />
 								</div>
 							</div>
 							<div class="uk-margin<?php echo $disabled; ?>">
