@@ -38,7 +38,7 @@ function surbma_yes_no_popup_admin_sidebar() {
 		<div id="informations" class="uk-card-body">
 			<?php if( SURBMA_YES_NO_POPUP_PLUGIN_VERSION == 'free' ) { ?>
 			<p><a id="purchase" class="uk-button uk-button-large uk-button-danger uk-width-1-1" href="#" title="<?php _e( 'Activate all the features of the CPS | Age Verification plugin!', 'surbma-yes-no-popup' ); ?>"><?php _e( 'Buy Premium Now!', 'surbma-yes-no-popup' ); ?></a></p>
-			<p><?php _e( 'With the Premium version you unlock all the fantastic features of this plugin. For a single site, it is <strong>$9.99</strong> for a year. With this small price, you support our work to make better products for you. Thank you!', 'surbma-yes-no-popup' ); ?></p>
+			<p><?php _e( 'With the Premium version you unlock all the fantastic features of this plugin. For a single site, it is <strong>$19.99</strong> for a year. With this small price, you support our work to make better products for you. Thank you!', 'surbma-yes-no-popup' ); ?></p>
 			<div class="uk-alert-primary" style="display: none;" uk-alert>
 				<?php _e( '<p>Use this special <strong>COUPON</strong> coupon to get 50% OFF your first purchase, which is available till <strong>Dec 31, 2099</strong></p>', 'surbma-yes-no-popup' ); ?>
 			</div>
