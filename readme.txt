@@ -4,7 +4,7 @@ Donate link: https://surbma.com/donate/
 Tags: age verify, age verification, woocommerce, popup, yes/no, adult, confirmation, restrict
 Requires at least: 5.2
 Tested up to: 6.2
-Stable tag: 7.8
+Stable tag: 8.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -94,7 +94,7 @@ Set your preferred time to delay the popup after the page is loaded. Maybe you w
 Set cookie expiration for visitors, so the popup won't show again in X days, you set.
 
 #### WooCommerce Settings
-Set the popup to show it on WooCommerce pages, like Shop, Cart, Checkout, Account pages or Product category and tag archive pages.
+Set the popup to show it on WooCommerce pages: Shop, Cart, Checkout, Account pages, single Products or Product category and tag archive pages.
 
 ### Developer informations
 
@@ -152,6 +152,25 @@ This plugin shows a simple popup with two options: Yes or No. One option is set 
 It is the reverse version of my last name. ;)
 
 == Changelog ==
+
+= 8.0 =
+
+Release date: 2023-07-11
+
+NEW
+
+- Popup can now set to show on specified post tags archive pages and on posts, that have the specified tags.
+
+OTHER
+
+- Code optimizations.
+- WooCommerce settings are preserved, even if Premium license is not valid.
+
+PREMIUM
+
+- NEW - Show popup on all product pages.
+- NEW - Show popup on specified product category pages and single product pages, that have the specified categories.
+- NEW - Show popup on specified product tag pages and single product pages, that have the specified tags.
 
 = 7.8 =
 

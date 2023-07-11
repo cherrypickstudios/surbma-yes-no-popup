@@ -5,7 +5,7 @@ Plugin Name: CPS | Age Verification
 Plugin URI: https://surbma.com/wordpress-plugins/
 Description: Shows a popup with age verification options.
 
-Version: 7.8
+Version: 8.0
 
 Author: CherryPickStudios
 Author URI: https://www.cherrypickstudios.com/
@@ -24,10 +24,9 @@ define( 'SURBMA_YES_NO_POPUP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SURBMA_YES_NO_POPUP_PLUGIN_FILE', __FILE__ );
 
 // Localization
-function surbma_yes_no_popup_init() {
+add_action( 'plugins_loaded', function() {
 	load_plugin_textdomain( 'surbma-yes-no-popup', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
-}
-add_action( 'plugins_loaded', 'surbma_yes_no_popup_init' );
+} );
 
 // Freemius SDK wrap to prevent conflicts with premium version.
 if ( function_exists( 'surbma_ynp_fs' ) ) {
@@ -72,15 +71,14 @@ if ( is_admin() ) {
 	include_once( SURBMA_YES_NO_POPUP_PLUGIN_DIR . '/lib/admin.php' );
 }
 
-function surbma_yes_no_popup_enqueue_scripts() {
+add_action( 'wp_enqueue_scripts', function() {
 	$options = get_option( 'surbma_yes_no_popup_fields' );
 	$popupstylesValue = isset( $options['popupstyles'] ) ? $options['popupstyles'] : 'almost-flat';
 	wp_enqueue_script( 'surbma-yes-no-popup-scripts', plugins_url( '', __FILE__ ) . '/assets/js/scripts-min.js', array( 'jquery' ), '2.27.5', true );
 	wp_enqueue_style( 'surbma-yes-no-popup-styles', plugins_url( '', __FILE__ ) . '/assets/css/styles-' . $popupstylesValue . '.css', false, '2.27.5' );
-}
-add_action( 'wp_enqueue_scripts', 'surbma_yes_no_popup_enqueue_scripts', 999 );
+}, 999 );
 
-function surbma_yes_no_popup_show() {
+add_action( 'wp_footer', function() {
 	$options = get_option( 'surbma_yes_no_popup_fields' );
 
 	$popupshoweverywhereValue = isset( $options['popupshoweverywhere'] ) ? $options['popupshoweverywhere'] : 0;
@@ -88,17 +86,17 @@ function surbma_yes_no_popup_show() {
 
 	if( $popupshoweverywhereValue == 1 && $popupexcepthereValue == '' ) {
 		add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
-	}
-	elseif( $popupshoweverywhereValue == 1 && $popupexcepthereValue != '' && !is_page( $popupexcepthereValue ) ) {
+	} elseif( $popupshoweverywhereValue == 1 && $popupexcepthereValue != '' && !is_page( $popupexcepthereValue ) ) {
 		add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
-	}
-	else {
+	} else {
 		if( isset( $options['popupshowfrontpage'] ) && $options['popupshowfrontpage'] == 1 && is_front_page() ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 		}
+
 		if( isset( $options['popupshowblog'] ) && $options['popupshowblog'] == 1 && is_home() ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 		}
+
 		if( class_exists( 'WooCommerce' ) ) {
 			if( isset( $options['popupshowarchive'] ) && $options['popupshowarchive'] == 1 && is_archive() && ( !is_shop() && !is_product_category() && !is_product_tag() ) ) {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
@@ -108,47 +106,98 @@ function surbma_yes_no_popup_show() {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 			}
 		}
+
 		foreach ( get_post_types( array( 'public' => true ), 'objects' ) as $post_type ) {
 			$popupshowcpt = 'popupshowcpt-' . $post_type->name;
 			if( isset( $options[$popupshowcpt] ) && $options[$popupshowcpt] != '' && is_singular( $post_type->name ) ) {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 			}
 		}
+
 		$includeposts = isset( $options['popupshowposts'] ) ? explode( ',', $options['popupshowposts'] ) : '';
 		if( $includeposts != '' && is_single( $includeposts ) ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 		}
+
 		$includepages = isset( $options['popupshowpages'] ) ? explode( ',', $options['popupshowpages'] ) : '';
 		if( $includepages != '' && is_page( $includepages ) ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 		}
+
 		$includecategories = isset( $options['popupshowcategories'] ) ? explode( ',', $options['popupshowcategories'] ) : '';
 		if( $includecategories != '' && $options['popupshowarchive'] != 1 && ( is_category( $includecategories ) || in_category( $includecategories ) ) ) {
 			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 		}
+
+		$includetags = isset( $options['popupshowtags'] ) ? explode( ',', $options['popupshowtags'] ) : '';
+		if( $includetags != '' && $options['popupshowarchive'] != 1 && ( is_tag( $includetags ) || has_tag( $includetags ) ) ) {
+			add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+		}
+
 		if( SURBMA_YES_NO_POPUP_PLUGIN_LICENSE == 'valid' && class_exists( 'WooCommerce' ) ) {
 			if( isset( $options['popupshowwcshop'] ) && $options['popupshowwcshop'] == 1 && is_shop() ) {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 			}
+
 			if( isset( $options['popupshowwccart'] ) && $options['popupshowwccart'] == 1 && is_cart() ) {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 			}
+
 			if( isset( $options['popupshowwccheckout'] ) && $options['popupshowwccheckout'] == 1 && is_checkout() ) {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 			}
+
 			if( isset( $options['popupshowwcaccount'] ) && $options['popupshowwcaccount'] == 1 && is_account_page() ) {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 			}
+
 			if( isset( $options['popupshowwcproductcategory'] ) && $options['popupshowwcproductcategory'] == 1 && is_product_category() ) {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 			}
+
 			if( isset( $options['popupshowwcproducttag'] ) && $options['popupshowwcproducttag'] == 1 && is_product_tag() ) {
 				add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
 			}
+
+			// Check popup activation on single product pages
+			if( is_product() ) {
+				// Check if popup is set to "All Products"
+				$popupshowwcproducts_value = isset( $options['popupshowwcproducts'] ) ? $options['popupshowwcproducts'] : 0;
+
+				if( 1 == $popupshowwcproducts_value ) {
+					add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+				} else {
+					// Get the current queried object
+					$current_object = get_queried_object();
+
+					// Get the product categories for the current object
+					$currentproductcategories = wp_get_post_terms( $current_object->ID, 'product_cat', array( 'fields' => 'ids' ) );
+
+					// Get the product category IDs set with the plugin settings
+					$includeproductcategories = isset( $options['popupshowproductcategories'] ) ? explode( ',', $options['popupshowproductcategories'] ) : array();
+
+					if ( !empty( array_intersect( $currentproductcategories, $includeproductcategories ) ) ) {
+						add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+					}
+				}
+			}
+
+			// Check popup activation on product category pages
+			if ( is_product_category() ) {
+				// Get the current category ID
+				$currentproductcategory = array();
+				$currentproductcategory[] = get_queried_object_id();
+
+				// Get the product category IDs set with the plugin settings
+				$includeproductcategories = isset( $options['popupshowproductcategories'] ) ? explode( ',', $options['popupshowproductcategories'] ) : array();
+
+				if ( !empty( array_intersect( $currentproductcategory, $includeproductcategories ) ) ) {
+					add_action( 'wp_footer', 'surbma_yes_no_popup_block', 999 );
+				}
+			}
 		}
 	}
-}
-add_action( 'wp_footer', 'surbma_yes_no_popup_show' );
+} );
 
 function surbma_yes_no_popup_block() {
 	$options = get_option( 'surbma_yes_no_popup_fields' );
@@ -232,7 +281,7 @@ function surbma_yes_no_popup_block() {
 	});
 </script>
 <div id="surbma-yes-no-popup" class="uk-modal surbma-yes-no-popup-<?php echo $popupthemesValue; ?><?php echo $popupdarkmodeValue; ?><?php echo $popupcentertextValue; ?> surbma-yes-no-popup-<?php echo $popupstylesValue; ?>" style="background-image: url(<?php echo esc_attr_e( $popupbackgroundimageValue ); ?>);background-size: cover;background-repeat: no-repeat;">
-    <div class="uk-modal-dialog<?php echo $popuplargeValue; ?>">
+	<div class="uk-modal-dialog<?php echo $popuplargeValue; ?>">
 		<?php if( $popupclosebuttonValue == 1 ) { ?>
 			<a class="uk-modal-close uk-close"></a>
 		<?php } ?>
@@ -259,10 +308,10 @@ function surbma_yes_no_popup_block() {
 </div>
 <script type="text/javascript">
 	function surbma_ynp_setCookie() {
-	    var d = new Date();
-	    d.setTime(d.getTime() + (<?php echo esc_attr_e( $popupcookiedaysValue ); ?>*24*60*60*1000));
-	    var expires = "expires="+ d.toUTCString();
-	    document.cookie = "surbma-yes-no-popup=yes;" + expires + ";path=/";
+		var d = new Date();
+		d.setTime(d.getTime() + (<?php echo esc_attr_e( $popupcookiedaysValue ); ?>*24*60*60*1000));
+		var expires = "expires="+ d.toUTCString();
+		document.cookie = "surbma-yes-no-popup=yes;" + expires + ";path=/";
 	}
 	function surbma_ynp_readCookie(cookieName) {
 		var re = new RegExp('[; ]'+cookieName+'=([^\\s;]*)');
@@ -271,19 +320,19 @@ function surbma_yes_no_popup_block() {
 		return '';
 	}
 	<?php if( $popupbuttonoptionsValue != 'button-1-redirect' ) { ?>
-    	document.getElementById("button1").onclick = function () {
+		document.getElementById("button1").onclick = function () {
 			surbma_ynp_setCookie();
-    	};
-    	document.getElementById("button2").onclick = function () {
-        	location.href = "<?php echo $popupbuttonurlValue; ?>";
-    	};
+		};
+		document.getElementById("button2").onclick = function () {
+			location.href = "<?php echo $popupbuttonurlValue; ?>";
+		};
 	<?php } else { ?>
-    	document.getElementById("button1").onclick = function () {
-        	location.href = "<?php echo $popupbuttonurlValue; ?>";
-    	};
-    	document.getElementById("button2").onclick = function () {
+		document.getElementById("button1").onclick = function () {
+			location.href = "<?php echo $popupbuttonurlValue; ?>";
+		};
+		document.getElementById("button2").onclick = function () {
 			surbma_ynp_setCookie();
-    	};
+		};
 	<?php } ?>
 </script>
 <?php
